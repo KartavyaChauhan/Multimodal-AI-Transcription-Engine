@@ -3,6 +3,7 @@ import { Command } from 'commander';
 import chalk from 'chalk';
 import fs from 'fs';
 import path from 'path';
+import { extractAudio } from './audio'; // Import the new function
 
 // Initialize CLI
 const program = new Command();
@@ -36,11 +37,14 @@ async function run(filePath: string, options: any) {
   if (!apiKey) {
     console.error(chalk.yellow('Warning: No API Key provided via flag or env variable.'));
     console.error(chalk.gray('You will need to set GEMINI_API_KEY to proceed with AI tasks.'));
-    // We don't exit yet, just warning.
-  } else {
-    console.log(chalk.green('✓ API Key detected'));
   }
 
-  // Next steps placeholder
-  console.log(chalk.gray('\nReady for Phase 2: Audio Extraction...'));
+  // 3. Audio Extraction
+  try {
+    const audioPath = await extractAudio(absolutePath);
+    // Future Phase 3: Send audioPath to Gemini
+  } catch (error) {
+    console.error(chalk.red('Failed to process audio. Exiting.'));
+    process.exit(1);
+  }
 }
