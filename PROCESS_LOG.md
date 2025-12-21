@@ -73,3 +73,5 @@ Audio file is split into chunks (default 20 mins).
 Iterated through chunks sequentially.
 
 Timestamp Correction: Added a timeOffset logic. If we are on Chunk 2 (starts at 20:00), we add 1200 seconds to every timestamp returned by the AI. This ensures the final JSON has absolute timestamps matching the original video.
+
+Implemented formatting.ts. Logic: Converted the AI's Start-Time-Only JSON into Start-End-Time SRT format. Assumption: I calculated the End Time based on the start of the next sentence. This is a standard heuristic in transcription when duration is missing.

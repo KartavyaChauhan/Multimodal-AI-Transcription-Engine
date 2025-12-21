@@ -95,6 +95,15 @@ async function run(filePath: string, options: any) {
       const fileUri = await client.uploadMedia(chunkPath);
       const chunkData = await client.transcribe(fileUri);
 
+      // --- Save Intermediate (Requirement #5) ---
+      const intermediatesDir = path.join(path.dirname(absolutePath), '.southbridge_intermediates');
+      if (!fs.existsSync(intermediatesDir)) fs.mkdirSync(intermediatesDir);
+      
+      const logPath = path.join(intermediatesDir, `chunk_${i + 1}_raw.json`);
+      fs.writeFileSync(logPath, JSON.stringify(chunkData, null, 2));
+      console.log(chalk.gray(`   -> Raw AI response saved to ${logPath}`));
+      // -------------------------------------------
+
       // 6. Adjust Timestamps (The "Drift Fix")
       const adjustedData = chunkData.map((item: any) => {
         const originalSeconds = parseTime(item.start);
