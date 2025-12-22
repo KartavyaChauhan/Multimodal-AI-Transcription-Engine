@@ -6,10 +6,8 @@ import path from 'path';
 import { extractAudio } from './audio';
 import { GeminiClient } from './ai';
 import { splitAudio } from './splitter';
-import { saveOutput } from './formatting';
-
-// Duration of our chunks in seconds (Must match splitter.ts)
-const CHUNK_DURATION_SECONDS = 20 * 60; 
+import { saveOutput, type OutputFormat } from './formatting';
+import { CHUNK_DURATION_SECONDS, SUPPORTED_FORMATS } from './config'; 
 
 const program = new Command();
 
@@ -19,6 +17,7 @@ program
   .version('1.0.0')
   .argument('<file>', 'Path to the video or audio file')
   .option('-k, --key <key>', 'Google Gemini API Key')
+  .option('-f, --format <format>', 'Output format: srt, vtt, or md', 'srt')
   .action((filePath, options) => {
     run(filePath, options);
   });
@@ -50,14 +49,22 @@ function formatTime(totalSeconds: number): string {
 async function run(filePath: string, options: any) {
   console.log(chalk.blue.bold('🐸 Southbridge Transcriber (Release 1)'));
 
-  // 1. Validate Input
+  // 1. Validate Input - File Exists
   if (!fs.existsSync(filePath)) {
     console.error(chalk.red(`Error: File not found at ${filePath}`));
     process.exit(1);
   }
   const absolutePath = path.resolve(filePath);
 
-  // 2. Load API Key
+  // 2. Validate Input - Supported Format
+  const fileExt = path.extname(absolutePath).toLowerCase();
+  if (!SUPPORTED_FORMATS.includes(fileExt)) {
+    console.error(chalk.red(`Error: Unsupported format "${fileExt}"`));
+    console.error(chalk.gray(`Supported formats: ${SUPPORTED_FORMATS.join(', ')}`));
+    process.exit(1);
+  }
+
+  // 3. Load API Key
   const envKey = process.env.GEMINI_API_KEY;
   if (!envKey && fs.existsSync('.env')) {
     const envConfig = fs.readFileSync('.env', 'utf8');
@@ -83,6 +90,9 @@ async function run(filePath: string, options: any) {
 
     const client = new GeminiClient(apiKey);
     let fullTranscript: any[] = [];
+    
+    // Get the base name of the input file for organizing outputs
+    const inputBaseName = path.parse(absolutePath).name;
 
     // 5. Loop through chunks
     for (let i = 0; i < chunks.length; i++) {
@@ -96,8 +106,9 @@ async function run(filePath: string, options: any) {
       const chunkData = await client.transcribe(fileUri);
 
       // --- Save Intermediate (Requirement #5) ---
-      const intermediatesDir = path.join(path.dirname(absolutePath), '.southbridge_intermediates');
-      if (!fs.existsSync(intermediatesDir)) fs.mkdirSync(intermediatesDir);
+      // Create a subfolder per input file to avoid overwriting
+      const intermediatesDir = path.join(path.dirname(absolutePath), '.southbridge_intermediates', inputBaseName);
+      if (!fs.existsSync(intermediatesDir)) fs.mkdirSync(intermediatesDir, { recursive: true });
       
       const logPath = path.join(intermediatesDir, `chunk_${i + 1}_raw.json`);
       fs.writeFileSync(logPath, JSON.stringify(chunkData, null, 2));
@@ -118,10 +129,16 @@ async function run(filePath: string, options: any) {
     }
 
     // 7. Output Result
-    console.log(chalk.cyan.bold('\n--- Generating SRT ---'));
+    const outputFormat = (options.format || 'srt').toLowerCase() as OutputFormat;
+    if (!['srt', 'vtt', 'md'].includes(outputFormat)) {
+      console.error(chalk.red(`Error: Invalid format "${options.format}". Use srt, vtt, or md.`));
+      process.exit(1);
+    }
     
-    // Instead of printing huge JSON, we save to file
-    saveOutput(absolutePath, fullTranscript);
+    console.log(chalk.cyan.bold(`\n--- Generating ${outputFormat.toUpperCase()} ---`));
+    
+    // Save to the specified format
+    saveOutput(absolutePath, fullTranscript, outputFormat);
     
     console.log(chalk.gray('Job complete.'));
     

@@ -2,25 +2,9 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 import { GoogleAIFileManager, FileState } from '@google/generative-ai/server';
 import ora from 'ora';
 import chalk from 'chalk';
+import { CANDIDATE_MODELS, TRANSCRIPTION_PROMPT } from './config';
 
-// The "Fallback" strategy - using current model names (Dec 2025)
-const CANDIDATE_MODELS = [
-  "models/gemini-2.5-flash",
-  "models/gemini-2.0-flash",
-  "models/gemini-2.5-pro",
-  "models/gemini-2.0-flash-lite"
-];
-
-const SYSTEM_PROMPT = `
-You are an expert transcription assistant. 
-Your task is to transcribe the audio provided perfectly, including speaker diarization and timestamps.
-
-OUTPUT RULES:
-1. Output MUST be valid JSON.
-2. Structure: Array of objects: { "speaker": "Speaker 1", "start": "MM:SS", "text": "..." }
-3. Identify distinct speakers.
-4. Do not summarize. Transcribe verbatim.
-`;
+const SYSTEM_PROMPT = TRANSCRIPTION_PROMPT;
 
 export class GeminiClient {
   private genAI: GoogleGenerativeAI;

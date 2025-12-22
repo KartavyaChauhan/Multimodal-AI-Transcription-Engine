@@ -1,52 +1,1447 @@
 [
   {
-    "speaker": "Speaker 1",
-    "start": "00:00",
-    "text": "The birch canoe slid on the smooth planks."
+    "speaker": "Speaker 2",
+    "start": "00:02",
+    "text": "Hello."
   },
   {
-    "speaker": "Speaker 1",
+    "speaker": "Speaker 2",
     "start": "00:04",
-    "text": "Glue the sheet to the dark blue background."
+    "text": "I'm Jack."
   },
   {
     "speaker": "Speaker 1",
-    "start": "00:07",
-    "text": "It is easy to tell the depth of a well."
+    "start": "00:06",
+    "text": "Hello. My name is Anne. Nice to meet you."
   },
   {
-    "speaker": "Speaker 1",
+    "speaker": "Speaker 2",
     "start": "00:10",
-    "text": "These days a chicken leg is a rare dish."
+    "text": "It's a pleasure. So, this is the house."
   },
   {
     "speaker": "Speaker 1",
     "start": "00:14",
-    "text": "Rice is often served in round bowls."
+    "text": "Hmm."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "00:16",
+    "text": "It's really beautiful."
   },
   {
     "speaker": "Speaker 1",
-    "start": "00:17",
-    "text": "The juice of lemons makes fine punch."
+    "start": "00:18",
+    "text": "Oh, yes, it is. But but it's very difficult to keep clean."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "00:25",
+    "text": "Sorry. Not a good start."
   },
   {
     "speaker": "Speaker 1",
-    "start": "00:20",
-    "text": "The box was thrown beside the park truck."
+    "start": "00:28",
+    "text": "Don't worry."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "00:32",
+    "text": "Your accent is very clear. Where are you from?"
   },
   {
     "speaker": "Speaker 1",
-    "start": "00:23",
-    "text": "The hogs are fed chopped corn and garbage."
+    "start": "00:36",
+    "text": "I'm from Oxford."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "00:38",
+    "text": "Wow, Oxford. 100% English."
   },
   {
     "speaker": "Speaker 1",
-    "start": "00:27",
-    "text": "Four hours of steady work faced us."
+    "start": "00:42",
+    "text": "Yes. And you are American. Is that right?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "00:47",
+    "text": "Yes. But my family is from Italy, Bologna."
   },
   {
     "speaker": "Speaker 1",
-    "start": "00:30",
-    "text": "A large size and stockings is hard to sell."
+    "start": "00:51",
+    "text": "Oh, Italy is wonderful. My sister is in Italy at the moment."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "00:56",
+    "text": "Where?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "00:57",
+    "text": "She's in Rome, studying Italian painters. She's really happy. Italians are so friendly. Oh, that's Alice."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "01:07",
+    "text": "Hi."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "01:08",
+    "text": "She's also part of the family."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "01:11",
+    "text": "It's nice to meet you, Alice."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "01:13",
+    "text": "So this is Jack, the new flatmate."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "01:16",
+    "text": "Yes. And he is from"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "01:18",
+    "text": "Nice to meet you, Jack."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "01:19",
+    "text": "I'm from Sydney, in Australia. And you are a Capricorn."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "01:25",
+    "text": "Yes! Amazing! I come from America. I'm from New York."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "01:32",
+    "text": "Wow, the big Apple."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "01:34",
+    "text": "Yes. Okay. Um, can I put my things in the bedroom?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "01:40",
+    "text": "Let me help you."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "01:48",
+    "text": "Hey, this is nice."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "01:51",
+    "text": "I'm glad you like it. It's a Mexican hat."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "01:55",
+    "text": "You look great."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "01:59",
+    "text": "And what is this?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "02:01",
+    "text": "It's an African mask."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "02:04",
+    "text": "Is it magic?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "02:05",
+    "text": "Of course. But look at this."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "02:10",
+    "text": "A bottle of Italian wine. Do you like wine?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "02:18",
+    "text": "Cheers."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "02:18",
+    "text": "Cheers."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "02:21",
+    "text": "Mm."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "02:22",
+    "text": "Mm, this wine is very good."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "02:24",
+    "text": "Mm, yes, it's really good."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "02:26",
+    "text": "Mm."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "02:28",
+    "text": "By the way, you're very lucky. Look, it's raining now."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "02:31",
+    "text": "Yes, I am lucky."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "02:33",
+    "text": "Oh, that's my photo album there. The pictures of all my friends are in here."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "02:38",
+    "text": "Oh, that's interesting, show me."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "02:39",
+    "text": "Yes."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "02:42",
+    "text": "So, this is Mary. She's from Ireland. Her mother and father are Greek."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "02:47",
+    "text": "Her parents are from Greece?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "02:48",
+    "text": "Yes, they're Greek."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "02:49",
+    "text": "Huh."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "02:50",
+    "text": "They're from Athens."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "02:52",
+    "text": "Oh, and who's that?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "02:53",
+    "text": "Uh, that's Alice."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "02:57",
+    "text": "No, that's not Alice."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "02:59",
+    "text": "Oh, yes it is after a party. A Halloween party."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "03:02",
+    "text": "Oh, that's funny. And, oh, and who are they?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "03:06",
+    "text": "Well, uh, that's Sharon and Peter. They live in the flat near here. They're good friends."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "03:11",
+    "text": "She's very pretty."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "03:12",
+    "text": "Mm."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "03:16",
+    "text": "Hello. My name is Jack. I'm the new flatmate. It's nice to meet you."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "03:23",
+    "text": "Hello Jack, I'm Peter Nash."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "03:27",
+    "text": "And Sharon?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "03:30",
+    "text": "Okay, and this is Sharon."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "03:35",
+    "text": "It's a pleasure."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "03:38",
+    "text": "How are you, Sharon?"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "03:39",
+    "text": "Fine, thanks."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "03:45",
+    "text": "Oh, good, you're friends. But so guys, there's work in the kitchen for everyone."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "03:55",
+    "text": "And you are a great cook."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "03:57",
+    "text": "Thank you, Jack."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "04:01",
+    "text": "Big announcement. Finally, I have all the points, and I can get that marvelous set of Chinese plates."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "04:08",
+    "text": "What?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "04:09",
+    "text": "Yes, with the cookies. Help me fill in the form, Jack, please."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "04:12",
+    "text": "All right. Let me see the questions. What's your name?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "04:15",
+    "text": "Are you joking?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "04:16",
+    "text": "Okay, okay. A N N E. And what's your family name?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "04:21",
+    "text": "Um, my surname?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "04:22",
+    "text": "Yes."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "04:23",
+    "text": "Right. Uh, Baxter."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "04:25",
+    "text": "B A X T E R. And what's your phone number?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "04:30",
+    "text": "It's 0454"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "04:33",
+    "text": "Uh-huh."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "04:33",
+    "text": "786 2097."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "04:38",
+    "text": "04547882097."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "04:42",
+    "text": "No, it's 04547862097."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "04:50",
+    "text": "Right."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "04:54",
+    "text": "You have to remember, this is your telephone number, too."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "04:58",
+    "text": "You're right."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "05:00",
+    "text": "Are you married?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:01",
+    "text": "No, I'm single."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "05:03",
+    "text": "A pretty girl like you is still single?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:05",
+    "text": "Stop it, Jack, please."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:08",
+    "text": "Yes."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:10",
+    "text": "For the moment, I'm single."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "05:12",
+    "text": "Next question, please. Where are you from?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:15",
+    "text": "Um, there are a lot of questions."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "05:17",
+    "text": "It's for your Chinese plates."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:20",
+    "text": "Okay, for the last time, I'm from England. From Oxford."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "05:25",
+    "text": "A X F O R D."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:27",
+    "text": "No."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:29",
+    "text": "O X F O R D."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "05:31",
+    "text": "Just joking."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:33",
+    "text": "It's okay."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:34",
+    "text": "What's next?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "05:35",
+    "text": "Just two more questions. The address is?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:38",
+    "text": "45 Trinity Lane, Flat C."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "05:41",
+    "text": "What's the postcode?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:43",
+    "text": "EC1 4RN."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "05:46",
+    "text": "E C 1 4 R N. And what's your job?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:50",
+    "text": "I'm an employee in a publishing company."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "05:53",
+    "text": "Oh, you're just the right person for me. I have a great love story to write."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "05:59",
+    "text": "Oh."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "06:03",
+    "text": "Good morning, Alice. How are you?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "06:07",
+    "text": "Hi, Anne. Good morning."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "06:10",
+    "text": "I'm fine, and you?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "06:12",
+    "text": "Fine, thanks."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "06:18",
+    "text": "Excuse me, where's my watch?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "06:21",
+    "text": "I don't know. Isn't it under the magazines?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "06:28",
+    "text": "No, it isn't. Are you sure?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "06:30",
+    "text": "Yes, I'm sure. It's not under the magazines, and and I'm late. I have an appointment at 8 o'clock."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "06:40",
+    "text": "Maybe it's here on the table."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "06:44",
+    "text": "No, the watch isn't here."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "06:47",
+    "text": "Behind the apples, next to the pasta."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "06:50",
+    "text": "Oh! There it is! Thanks Alice."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "06:56",
+    "text": "You're welcome, Anne. Bye."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "07:04",
+    "text": "Oh, no. It's late."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "07:10",
+    "text": "Alice, what time is it?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "07:11",
+    "text": "Just a moment."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "07:15",
+    "text": "It's half past 7."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "07:18",
+    "text": "Half past 7. My train is at 8 o'clock."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "07:21",
+    "text": "Hurry up, Jack, you're late."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "07:25",
+    "text": "Okay, okay, where are my keys?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "07:29",
+    "text": "They're here on the table."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "07:31",
+    "text": "Oh, thanks, Alice. Now, another problem. Where is my sweater?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "07:39",
+    "text": "Maybe it's on the chair."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "07:41",
+    "text": "No, it isn't. Where is it?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "07:45",
+    "text": "Calm down, Jack. You're wearing it."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "07:48",
+    "text": "Oh. Thanks, Alice."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "07:53",
+    "text": "You're a lifesaver."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "07:55",
+    "text": "Hurry up. Go, go, go."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "07:59",
+    "text": "Too much stress. I must go back to bed again."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "08:07",
+    "text": "Okay, okay, girls, what time is the dinner tonight at the restaurant?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "08:11",
+    "text": "Uh, it's at half past eight."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "08:13",
+    "text": "Are you sure? I think it's at half past nine."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "08:15",
+    "text": "Okay, guys, when is it?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "08:17",
+    "text": "I'm certain it's at 8:30. Sorry, it's at 9:30."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "08:23",
+    "text": "Okay, okay, it's tonight, right?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "08:24",
+    "text": "Yes, it's tonight. But what time is it, by the way?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "08:28",
+    "text": "The clock over there, it's at a quarter to 7."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "08:30",
+    "text": "So if it's after 6, Sharon's at home."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "08:33",
+    "text": "No, she isn't. She's at work."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "08:35",
+    "text": "No, usually she comes back home after 6."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "08:39",
+    "text": "Hi Sharon. Good evening."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "08:41",
+    "text": "Hi guys."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "08:42",
+    "text": "Sharon, please help us. What time is the dinner tonight?"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "08:44",
+    "text": "It's quite late, it's at half past ten."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "08:46",
+    "text": "See, Jack, half past ten."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "08:48",
+    "text": "Okay, you're right, I'm wrong."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "08:51",
+    "text": "Women."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "08:55",
+    "text": "Hello, Anne."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "08:56",
+    "text": "Oh, it's you, Peter. Look. This is it!"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "09:02",
+    "text": "Look at what?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "09:04",
+    "text": "My office. Here, near my bed."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "09:07",
+    "text": "Oh, I see."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "09:09",
+    "text": "By the way, where are the office supplies?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "09:13",
+    "text": "The computer supplies are in that cupboard over there. The folders, pencils, pens, etc. are here in this cupboard. And I also have two chairs."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "09:26",
+    "text": "Oh, good, at least for everyone."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "09:28",
+    "text": "No, they are not. Don't touch anything, please."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "09:32",
+    "text": "Okay, so you say you have all of the office supplies?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "09:35",
+    "text": "No, not really. Um, there isn't a fax machine."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "09:40",
+    "text": "There aren't all the programs I need on my computer."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "09:43",
+    "text": "And I guess you have an answering machine. Is it useful?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "09:47",
+    "text": "I don't need an answering machine. I answer the telephone myself."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "09:52",
+    "text": "Okay, you're right. This office is nice."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "09:56",
+    "text": "And if you need a fax machine, I have one in my apartment."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "09:59",
+    "text": "Oh, thank you."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "10:01",
+    "text": "Wait a minute. Something is missing. Where's the coffee machine? All offices have a coffee machine."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "10:09",
+    "text": "I'm afraid there isn't one here. There's a staff kitchen on the other side of the house. In the kitchen."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "10:18",
+    "text": "We can have some coffee there."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "10:19",
+    "text": "Good idea."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "10:22",
+    "text": "Do you want milk with your coffee? There's a bottle in the back of the fridge."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "10:27",
+    "text": "I prefer it without milk, but with some sugar."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "10:33",
+    "text": "Oh, I'm afraid there isn't any sugar."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "10:36",
+    "text": "Well, that's okay. Black coffee is good too."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "10:40",
+    "text": "Do you have any of those great cookies?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "10:43",
+    "text": "Oh, yes."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "10:46",
+    "text": "There are some cookies over here."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "10:56",
+    "text": "Peter speaking."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "10:59",
+    "text": "What?"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "11:01",
+    "text": "An audition."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "11:04",
+    "text": "No, not at all."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "11:07",
+    "text": "I'm free. Great."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "11:12",
+    "text": "Bye."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "11:15",
+    "text": "Well, finally, an audition."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "11:18",
+    "text": "Wonderful! When?"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "11:20",
+    "text": "Next Monday, at the Opera Theater. These cookies are fantastic. Are there any more?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "11:27",
+    "text": "There are some more in the box."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "11:30",
+    "text": "Thank you. Bye, Ann. Time for music."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "11:36",
+    "text": "Hey! Take your dirty napkin away from my kitchen!"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "11:43",
+    "text": "Mmm!"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "11:44",
+    "text": "Oh."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "11:48",
+    "text": "Yes. I always go shopping on Saturdays. The first thing I do on Saturday is drive to the supermarket."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "12:00",
+    "text": "I sometimes go shopping on Saturdays, but usually I sleep late. I'm always so tired on Saturdays."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "12:09",
+    "text": "I'm never tired on the weekend. The weekend is a time for fun. I paint, go jogging, go out with some friends."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "12:19",
+    "text": "Unfortunately, I sometimes have to study."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "12:23",
+    "text": "Oh, I sometimes do a little work at the weekend."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "12:27",
+    "text": "When I'm free, I like going swimming, going to exhibitions or to concerts if I have enough money. Oh, and every Sunday, I clean up the entire flat."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "12:44",
+    "text": "And in the evening, I watch TV."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "12:47",
+    "text": "Oh, I never watch TV. It's boring."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "12:51",
+    "text": "Peter and I like going to the cinema at the weekend."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "12:54",
+    "text": "Yes, it's important not to watch too much TV. An hour a day or so, that's enough."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "13:02",
+    "text": "Come on, guys. You talk like my grandfather. Work, TV, housework on the weekends? Life is more."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "13:12",
+    "text": "I want you to take me to places where young people have fun."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "13:18",
+    "text": "Great. Get ready, Grandpa."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "13:21",
+    "text": "Work is so hard, guys. I wake up at 6:30 every day. Have breakfast and take the train to work. Every day."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "13:33",
+    "text": "I know. I get up at 7:00, but I have a friend at work who usually gets up at 6:00."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "13:40",
+    "text": "Why? That's too early."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "13:44",
+    "text": "It takes him an hour to drive to work."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "13:47",
+    "text": "Wow. That's a long drive."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "13:50",
+    "text": "Yes. But he lives in the country. I think he's lucky."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "13:57",
+    "text": "Every weekend he can go for walks in the woods. Not in traffic jams."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "14:03",
+    "text": "I guess that's pretty nice. He lives in the countryside, but works in the city. A pretty nice combination."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "14:14",
+    "text": "What about you, Sharon? What time do you wake up?"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "14:18",
+    "text": "I usually get up at about 9:00. But I live in the city. It's easy to get to work."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "14:25",
+    "text": "Yes, but you get home very late. Often 6:30 or 7:00."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "14:31",
+    "text": "You know, I sometimes have five or six groups of tourists a day."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "14:36",
+    "text": "You work too much, my dear."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "14:41",
+    "text": "And you sing too much, Peter."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "14:46",
+    "text": "Alice, I bet you don't wake up at 6:00 every day. Tell us something about your typical day at university."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "14:56",
+    "text": "Well, I sometimes have classes in the morning, but I usually have classes in the afternoon. On Mondays, I always attend lectures in the morning."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "15:05",
+    "text": "And where do you study?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "15:07",
+    "text": "I usually study in the library, but I sometimes study at home, too, when I don't have classes in the morning."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "15:15",
+    "text": "My friend David also studies at your university. Do you remember him?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "15:21",
+    "text": "David Leary?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "15:23",
+    "text": "Yes, I occasionally see him in the library and sometimes in the park."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "15:28",
+    "text": "In the park? Doing what?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "15:32",
+    "text": "He likes studying there. He takes his books, finds a nice park bench and reads there."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "15:38",
+    "text": "Not a bad idea. You can study and enjoy nature at the same time."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "15:44",
+    "text": "Yes, I like the park, too. Unfortunately, I often need books that are in the library."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "15:51",
+    "text": "And what about lunch? Do you usually make sandwiches and take them with you?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "15:57",
+    "text": "Oh, no. I hate cooking. I usually have lunch in the cafeteria with friends."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "16:05",
+    "text": "Oh, I do just the opposite. I usually cook lunch at home. I seldom have a quick lunch at coffee shops."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "16:14",
+    "text": "Okay, guys. Stop with this boring talk. What about fun? Do any of you do anything besides working and studying? It's Friday, remember?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "16:31",
+    "text": "You're right, Jack. I'm so happy it's Friday."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "16:36",
+    "text": "Me too. It's weekend time."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "16:40",
+    "text": "Time for shopping!"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "16:43",
+    "text": "May I ask you a question, Alice?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "16:45",
+    "text": "Sure. Ask any question you like. I'm an open book."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "16:48",
+    "text": "Do you have a boyfriend?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "16:50",
+    "text": "Well, I go out with some boys, but that's nothing serious. According to my birth chart, I need some Taurians. But that's not easy now that Saturn is in Leo."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "17:07",
+    "text": "I see. Anyway, I think you have a strange relationship with boys."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "17:12",
+    "text": "Oh, no. I like boys very much. They're great at carrying packages."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "17:19",
+    "text": "You're exceptional."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "17:21",
+    "text": "Thanks, Jack. But now, stop talking about me. Let's talk about you. What do you think of me?"
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "17:32",
+    "text": "No, really. I'm curious. What do you do at work?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "17:38",
+    "text": "Oh, nothing special. Um, you know Speedmaster, the sporting goods factory."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "17:44",
+    "text": "Yeah, sure, they produce wonderful running shoes. What department do you work in?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "17:48",
+    "text": "I'm a sales manager. Last month they gave me a promotion and now I'm responsible for Southern Europe. That's why I moved here."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "17:55",
+    "text": "Wow, that's really interesting. You must be very good at work. What exactly do you do?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "18:01",
+    "text": "Oh, basically, I look for new clients and keep them informed about new product lines and take care of their requests."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "18:08",
+    "text": "What kind of requests do they have?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "18:10",
+    "text": "Oh, they often ask questions about new models and prices."
+  },
+  {
+    "speaker": "Speaker 3",
+    "start": "18:14",
+    "text": "What do you do if they want a discount?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "18:16",
+    "text": "Well, basically, I don't get mad. I listen to them and then I tell them, no. Well, seriously speaking, it depends. Each client is different. If they're important, I try to make an agreement with them."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "18:32",
+    "text": "Hi, Anne. Hi, Sharon. Where's Peter?"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "18:36",
+    "text": "Oh, Peter's preparing his audition."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "18:39",
+    "text": "Well, tell Peter I wish him good luck."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "18:41",
+    "text": "Do you really care?"
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "18:42",
+    "text": "Oh, girls, we're talking about jobs. Tell me about your job, Sharon. What do you do at the moment?"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "18:48",
+    "text": "Ah, that's an interesting question."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "18:50",
+    "text": "Really? Why do you say that?"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "18:52",
+    "text": "Well, you know I have a degree in archaeology, but now I'm doing something quite different."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "18:58",
+    "text": "Do you have a part-time job?"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "19:00",
+    "text": "No, unfortunately, it's a full-time job. I work for a travel agency."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "19:03",
+    "text": "Oh, what do you do?"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "19:06",
+    "text": "I give tours around the city. I bring tourists to monuments and museums, and other interesting places."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "19:13",
+    "text": "Well, that's nice."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "19:15",
+    "text": "Could I have you as a tour guide for one day?"
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "19:18",
+    "text": "I'm sorry. I only work with groups. Usually with Japanese people."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "19:23",
+    "text": "Oh, well, I'm a black belt in karate."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "19:25",
+    "text": "Very funny, but it's not enough."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "19:28",
+    "text": "It's too bad."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "19:31",
+    "text": "Anne, stop cleaning for a moment. Sit down and tell me about your job."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "19:39",
+    "text": "Okay, okay, okay, okay."
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "19:40",
+    "text": "I work in a publishing company."
+  },
+  {
+    "speaker": "Speaker 2",
+    "start": "19:42",
+    "text": "Oh, so you work with famous writers?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "19:44",
+    "text": "Not exactly. Um, I don't work with the writers. I just read their proofs and correct them before printing."
+  },
+  {
+    "speaker": "Speaker 4",
+    "start": "19:52",
+    "text": "Ah, by the way, do you know Paul Taylor? He works with you, right?"
+  },
+  {
+    "speaker": "Speaker 1",
+    "start": "19:55",
+    "text": "Yes, yes, but we don't work in the same department. He works in the advertising department."
   }
 ]

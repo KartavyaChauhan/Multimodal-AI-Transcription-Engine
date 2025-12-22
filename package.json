@@ -1,13 +1,36 @@
 {
   "name": "southbridge-transcriber",
   "version": "1.0.0",
-  "description": "A multimodal transcription and diarization tool",
+  "description": "A multimodal transcription and diarization tool using Google Gemini AI",
   "main": "index.ts",
+  "type": "module",
   "bin": {
-    "sb-transcribe": "./index.ts"
+    "sb-transcribe": "./index.ts",
+    "southbridge-transcriber": "./index.ts"
   },
   "scripts": {
-    "start": "bun run index.ts"
+    "start": "bun run index.ts",
+    "build": "bun build index.ts --outdir ./dist --target node",
+    "link": "bun link"
+  },
+  "keywords": [
+    "transcription",
+    "diarization",
+    "subtitles",
+    "srt",
+    "vtt",
+    "gemini",
+    "ai",
+    "speech-to-text"
+  ],
+  "author": "KartavyaChauhan",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KartavyaChauhan/southbridge-transcriber.git"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

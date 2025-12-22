@@ -1,12 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import chalk from 'chalk';
+import { MIN_SUBTITLE_DURATION, LAST_SUBTITLE_DURATION } from './config';
 
 interface TranscriptItem {
   speaker: string;
   start: string; // "HH:MM:SS"
   text: string;
 }
+
+export type OutputFormat = 'srt' | 'vtt' | 'md';
 
 /**
  * Converts "HH:MM:SS" to seconds.
@@ -37,48 +40,135 @@ function secondsToSrtTime(totalSeconds: number): string {
 }
 
 /**
- * Generates SRT content from the transcript JSON.
- * Logic: End time of Line A = Start time of Line B.
+ * Converts seconds to VTT timestamp format "HH:MM:SS.mmm"
  */
-export function generateSrt(transcript: TranscriptItem[]): string {
-  let srtContent = '';
+function secondsToVttTime(totalSeconds: number): string {
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = Math.floor(totalSeconds % 60);
+  const ms = Math.floor((totalSeconds % 1) * 1000);
+  
+  return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}.${ms.toString().padStart(3, '0')}`;
+}
 
-  for (let i = 0; i < transcript.length; i++) {
-    const item = transcript[i]!;
+/**
+ * Converts seconds to readable time format "[HH:MM:SS]"
+ */
+function secondsToReadableTime(totalSeconds: number): string {
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = Math.floor(totalSeconds % 60);
+  
+  if (h > 0) {
+    return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  }
+  return `${m}:${s.toString().padStart(2, '0')}`;
+}
+
+/**
+ * Calculate end times for all transcript items
+ */
+function calculateEndTimes(transcript: TranscriptItem[]): Array<{ item: TranscriptItem; startTime: number; endTime: number }> {
+  return transcript.map((item, i) => {
     const nextItem = transcript[i + 1];
-
     const startTime = timeToSeconds(item.start);
     let endTime;
 
     if (nextItem) {
       endTime = timeToSeconds(nextItem.start);
     } else {
-      // For the last line, assume it lasts 3 seconds
-      endTime = startTime + 3;
+      endTime = startTime + LAST_SUBTITLE_DURATION;
     }
 
-    // Safety: Ensure subtitle is at least 1 second long
-    if (endTime - startTime < 1) endTime = startTime + 1;
+    if (endTime - startTime < MIN_SUBTITLE_DURATION) {
+      endTime = startTime + MIN_SUBTITLE_DURATION;
+    }
 
+    return { item, startTime, endTime };
+  });
+}
+
+/**
+ * Generates SRT content from the transcript JSON.
+ */
+export function generateSrt(transcript: TranscriptItem[]): string {
+  const items = calculateEndTimes(transcript);
+  let srtContent = '';
+
+  items.forEach((entry, i) => {
     srtContent += `${i + 1}\n`;
-    srtContent += `${secondsToSrtTime(startTime)} --> ${secondsToSrtTime(endTime)}\n`;
-    srtContent += `[${item.speaker}] ${item.text}\n\n`;
-  }
+    srtContent += `${secondsToSrtTime(entry.startTime)} --> ${secondsToSrtTime(entry.endTime)}\n`;
+    srtContent += `[${entry.item.speaker}] ${entry.item.text}\n\n`;
+  });
 
   return srtContent;
 }
 
 /**
- * Saves the transcript to a .srt file next to the input video.
+ * Generates VTT (WebVTT) content from the transcript JSON.
  */
-export function saveOutput(originalFilePath: string, transcript: TranscriptItem[]) {
+export function generateVtt(transcript: TranscriptItem[]): string {
+  const items = calculateEndTimes(transcript);
+  let vttContent = 'WEBVTT\n\n';
+
+  items.forEach((entry, i) => {
+    vttContent += `${i + 1}\n`;
+    vttContent += `${secondsToVttTime(entry.startTime)} --> ${secondsToVttTime(entry.endTime)}\n`;
+    vttContent += `<v ${entry.item.speaker}>${entry.item.text}\n\n`;
+  });
+
+  return vttContent;
+}
+
+/**
+ * Generates Markdown content from the transcript JSON.
+ */
+export function generateMarkdown(transcript: TranscriptItem[], originalFilePath: string): string {
+  const fileName = path.basename(originalFilePath);
+  const processedDate = new Date().toLocaleString();
+  
+  // Extract unique speakers
+  const speakers = [...new Set(transcript.map(item => item.speaker))];
+  
+  let mdContent = `# Transcript: ${fileName}\n\n`;
+  mdContent += `_Processed on ${processedDate}_\n\n`;
+  mdContent += `## Speakers\n\n`;
+  speakers.forEach(speaker => {
+    mdContent += `- **${speaker}**\n`;
+  });
+  mdContent += `\n## Transcript\n\n`;
+
+  transcript.forEach(item => {
+    const readableTime = secondsToReadableTime(timeToSeconds(item.start));
+    mdContent += `**[${readableTime}] ${item.speaker}:** ${item.text}\n\n`;
+  });
+
+  return mdContent;
+}
+
+/**
+ * Saves the transcript to the specified format next to the input video.
+ */
+export function saveOutput(originalFilePath: string, transcript: TranscriptItem[], format: OutputFormat = 'srt') {
   const parse = path.parse(originalFilePath);
-  // Output file: video_name.srt
-  const outputPath = path.join(parse.dir, `${parse.name}.srt`);
+  const outputPath = path.join(parse.dir, `${parse.name}.${format}`);
   
-  const srtContent = generateSrt(transcript);
+  let content: string;
   
-  fs.writeFileSync(outputPath, srtContent);
-  console.log(chalk.green(`\n✅ Saved subtitle file: ${outputPath}`));
+  switch (format) {
+    case 'vtt':
+      content = generateVtt(transcript);
+      break;
+    case 'md':
+      content = generateMarkdown(transcript, originalFilePath);
+      break;
+    case 'srt':
+    default:
+      content = generateSrt(transcript);
+      break;
+  }
+  
+  fs.writeFileSync(outputPath, content);
+  console.log(chalk.green(`\n✅ Saved ${format.toUpperCase()} file: ${outputPath}`));
   return outputPath;
 }

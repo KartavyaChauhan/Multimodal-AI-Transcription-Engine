@@ -3,10 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import chalk from 'chalk';
 import ora from 'ora';
-
-// We split into 20-minute chunks (1200 seconds) to prevent AI drift
-const CHUNK_DURATION_MINUTES = 20;
-const CHUNK_DURATION_SECONDS = CHUNK_DURATION_MINUTES * 60;
+import { CHUNK_DURATION_SECONDS } from './config';
 
 /**
  * Gets the duration of a media file in seconds.
