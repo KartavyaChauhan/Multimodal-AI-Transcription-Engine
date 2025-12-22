@@ -1,8 +1,7 @@
 # Process Log - Southbridge Transcriber
 
 
-**Intent:**
-Started the project today with the goal of building a multimodal transcription tool.
+Started the project with the goal of building a multimodal transcription tool.
 I have chosen to use **Bun** as the runtime because it is faster for local CLI tools and was requested in the spec.
 I am using **TypeScript** to ensure type safety, especially when handling the complex JSON responses we expect from the LLM later.
 
@@ -22,16 +21,11 @@ CLI skeleton is working. It correctly identifies file paths. Next step is connec
 
 Implemented audio.ts using fluent-ffmpeg. Why? Multimodal LLMs work better with audio-only inputs to save bandwidth and token costs. Decision: I added a check if (fs.existsSync(audioPath)) to skip re-processing if the audio is already there. This will make debugging much faster since I won't have to wait for ffmpeg every time I re-run the script.
 
----
-
-## Phase 3: AI Transcription Engine
-
 **Implemented ai.ts using the Google Generative AI SDK. Key Architecture:**
 - Adapted the 'Fallback Logic' to automatically switch from Flash -> Pro -> Flash-lite if a 429 (Quota) error occurs. This ensures reliability during demos.
 - Implemented a 'Polling Loop' for file uploads. Multimodal files aren't ready instantly; we must wait for state === ACTIVE.
 - Used a rigid System Prompt to force JSON output, making the next phase (parsing) deterministic.
 
-### Issue Encountered: Model Names Not Found (404 Error)
 
 **Problem:**
 When running the transcription, we got 404 errors like:
@@ -61,7 +55,7 @@ const CANDIDATE_MODELS = [
 ];
 ```
 
-**Lesson Learned:**
+**Lesson Learned/Issues:**
 - Google's model naming conventions change frequently. Always verify available models via the ListModels API.
 - The `models/` prefix is required when using the Google Generative AI SDK.
 - Keep multiple fallback models to handle quota exhaustion gracefully.
@@ -82,4 +76,65 @@ CLI Polish: Added npx/bunx bin configuration in package.json and a --format flag
 
 Safety: Refactored intermediate logging to use subfolders, preventing overwrites when processing multiple files.
 
-Status: All functional requirements (1-5) and reliability goals are met.
+
+**Prompts Used**
+I used two AI tools during this assignment: Google Gemini (Pro/Flash) and GitHub Copilot (Claude Opus 4.5).
+The prompts used are numbered below. I have included only the main prompts that were essential to the assignment, as some interactions were minor (e.g., asking the AI to proceed to the next step or to confirm results).
+
+I did not encounter many errors during development. When errors did occur, I pasted the error messages into Gemini and manually implemented the suggested solutions after reviewing them.
+
+Gemini Prompts
+
+1. Asked Gemini to help break the assignment into phases and outline a step-wise implementation plan.
+
+2. Implememnted the step wise plans propsoed by Gemini with the help of copliot.
+
+(for few steps then got the code snippets and the implemntaion tasks and integrated them in the project structure usign copilot no new prompts used just told to move on to next steps)
+
+3. verified with gemini if we are on right track be providing the git repos provided in hte background of the assignment ( gemini suggested to include splitter file after this prompt)
+
+4. confirmed the output in srt files and json files and understand the importance of intermediates required in the assignment 
+
+
+5. Asked why are not any llm calls like the raw data gemini collected and its processing saved in the chunk_1_raw.json
+
+6. Understood from gemini importnace of the files involved and how it helps in completing the assignment
+
+7. what does these two mean raw transcripts
+diarization output
+?
+
+8. what does this mean ✔ Audio is short enough. No splitting needed. and i am stil unabel to undertand what you explained above for the 3 sec and the toal video for the above was 3:25 min
+
+9. so we wont analyse a file gretaer than 20 minutes ?
+
+(Confirmed the changes made by copilot form gemini by providing it the lastest codes and files)
+
+
+Copilot prompts
+
+1. Asked copilot to have a look at the assignment so that it have context of what i will be doing and help in debugging errors and completing it 
+
+2. asked it to explain th ecurrent progress and help me understand what have been done
+
+3. what doe sthis mean program
+.name('sb-transcribe')
+.description('Transcribe and diarize video/audio using Multimodal AI')
+.version('1.0.0')
+.argument('<file>', 'Path to the video or audio file')
+.option('-k, --key <key>', 'Google Gemini API Key')
+.action((filePath, options) => {
+run(filePath, options);
+});
+
+program.parse();
+
+6. why are there two files created one for test.mp4 and one for test.mp3 when i bun run index.ts test.mp4?
+
+7. Aksed to add the feautre for not overwritting the json log file and srt file for new audio/video 
+
+(verifed the project status be providing the orignal task once again)
+
+8. Asked to fic Configurable Parameters so it help me by creating config.ts - Centralized Configuration
+
+9. then asked to help output SRT, VTT, or MD file	and accessible via npx/bunx or bun link.
