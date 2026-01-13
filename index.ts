@@ -26,6 +26,7 @@ program
   .option('-r, --report', 'Generate a meeting report with key points and action items')
   .option('-p, --preset <preset>', 'Use a preset: fast, quality, or lite')
   .option('--show-cost', 'Show estimated API cost after processing')
+  .option('--force', 'Force re-transcription, ignoring cached results')
   .option('--no-interactive', 'Skip interactive speaker identification')
   .action((filePath, options) => {
     run(filePath, options);
@@ -189,6 +190,10 @@ async function run(filePath: string, options: any) {
     
     // Get the base name of the input file for organizing outputs
     const inputBaseName = path.parse(absolutePath).name;
+    
+    // Cache directory for this file
+    const intermediatesDir = path.join(path.dirname(absolutePath), '.southbridge_intermediates', inputBaseName);
+    if (!fs.existsSync(intermediatesDir)) fs.mkdirSync(intermediatesDir, { recursive: true });
 
     // 5. Loop through chunks
     for (let i = 0; i < chunks.length; i++) {
@@ -197,18 +202,29 @@ async function run(filePath: string, options: any) {
       
       console.log(chalk.yellow(`\n--- Processing Chunk ${i + 1}/${chunks.length} ---`));
       
-      // Upload & Transcribe
-      const fileUri = await client.uploadMedia(chunkPath);
-      const chunkData = await client.transcribe(fileUri);
-
-      // --- Save Intermediate (Requirement #5) ---
-      // Create a subfolder per input file to avoid overwriting
-      const intermediatesDir = path.join(path.dirname(absolutePath), '.southbridge_intermediates', inputBaseName);
-      if (!fs.existsSync(intermediatesDir)) fs.mkdirSync(intermediatesDir, { recursive: true });
+      const cachePath = path.join(intermediatesDir, `chunk_${i + 1}_raw.json`);
+      let chunkData: any[];
       
-      const logPath = path.join(intermediatesDir, `chunk_${i + 1}_raw.json`);
-      fs.writeFileSync(logPath, JSON.stringify(chunkData, null, 2));
-      console.log(chalk.gray(`   -> Raw AI response saved to ${logPath}`));
+      // --- Smart Caching: Check if we already have this chunk transcribed ---
+      if (!options.force && fs.existsSync(cachePath)) {
+        console.log(chalk.green(`   ✓ Found cached transcription, skipping API call`));
+        try {
+          chunkData = JSON.parse(fs.readFileSync(cachePath, 'utf-8'));
+        } catch (e) {
+          console.log(chalk.yellow(`   ⚠ Cache corrupted, re-transcribing...`));
+          const fileUri = await client.uploadMedia(chunkPath);
+          chunkData = await client.transcribe(fileUri);
+          fs.writeFileSync(cachePath, JSON.stringify(chunkData, null, 2));
+        }
+      } else {
+        // No cache or --force flag: call the API
+        const fileUri = await client.uploadMedia(chunkPath);
+        chunkData = await client.transcribe(fileUri);
+        
+        // Save to cache for future runs
+        fs.writeFileSync(cachePath, JSON.stringify(chunkData, null, 2));
+        console.log(chalk.gray(`   -> Cached to ${cachePath}`));
+      }
       // -------------------------------------------
 
       // 6. Adjust Timestamps (The "Drift Fix")
