@@ -1,126 +1,408 @@
 # Southbridge Transcriber 🐸
 
-A robust, multimodal AI transcription and diarization tool built for the Southbridge take-home assignment. It acts as a unified "Level 2" solution, combining the architectural strengths of reference tools (`ipgu`, `offmute`, `meeting-diary`) into a single, production-ready CLI.
+A robust, multimodal AI transcription and diarization tool built for the Southbridge take-home assignment. It combines the architectural strengths of reference tools (`ipgu`, `offmute`, `meeting-diary`) into a single, production-ready CLI.
+
+---
+
+## ✨ What's New (Since Initial Submission)
+
+| Feature | Description |
+|---------|-------------|
+| **5 Output Formats** | SRT, VTT, Markdown, TXT, JSON |
+| **Interactive Speaker ID** | Tool pauses to let you name each speaker |
+| **Smart Caching** | Re-runs are instant (skips API calls) |
+| **Meeting Reports** | AI-generated summaries with action items |
+| **Model Selection** | Choose Pro, Flash, or Flash-Lite |
+| **Presets** | Quick configs: `fast`, `quality`, `lite` |
+| **Cost Estimation** | See token usage and estimated cost |
+| **120-min Chunks** | Better speaker consistency for long files |
+
+See [CHANGES.md](./CHANGES.md) for full details.
+
+---
 
 ## 🚀 Features
 
-* **Multimodal Intelligence:** Uses the latest **Google Gemini 2.0 & 2.5** models to "hear" audio directly, capturing nuance and tone better than text-only pipelines.
-* **Reliability & Scalability:** Implements smart **Audio Chunking** (splitting files >20 mins) to prevent LLM timestamp drift and timeout errors.
-* **Speaker Diarization:** Leveraging Gemini's multimodal capabilities to automatically identify and label distinct speakers.
-* **Multi-Format Output:** Generates **SRT** (Subtitles), **VTT** (Web Captions), and **Markdown** (Meeting Summaries). Default is SRT.
-* **Resilience:** Includes **smart fallback logic** that automatically switches AI models (e.g., Flash → Pro) specifically when API quota limits (429 errors) are hit.
-* **Debug Traceability:** Saves raw "Intermediate" AI responses in auto-generated subfolders (`.southbridge_intermediates/{filename}/`) for inspection.
-* **Smart Caching:** Skips expensive audio extraction and splitting steps if the artifacts already exist.
+### Core Transcription
+- **Multimodal Intelligence:** Uses **Google Gemini 2.5** models to "hear" audio directly
+- **Speaker Diarization:** Automatically identifies and labels distinct speakers
+- **Auto Speaker Naming:** AI detects actual names when spoken in the audio
+- **120-Minute Context:** Processes up to 2 hours without splitting (better consistency)
+
+### Output Formats
+| Format | Flag | Description |
+|--------|------|-------------|
+| **SRT** | `--format srt` | Standard subtitles (default) |
+| **VTT** | `--format vtt` | Web video captions |
+| **Markdown** | `--format md` | Meeting transcript with header, speakers list |
+| **TXT** | `--format txt` | Plain text with timestamps |
+| **JSON** | `--format json` | Structured data with metadata |
+
+### Intelligence Features
+- **Meeting Reports** (`--report`): AI-generated executive summary, key points, decisions, and action items
+- **Smart Caching**: Skips expensive API calls on re-runs (different format = instant)
+- **Cost Estimation** (`--show-cost`): See token usage and estimated cost in USD
+
+### Flexibility
+- **Model Selection**: Choose between Pro (best quality), Flash (fast), or Flash-Lite (cheapest)
+- **Presets**: Quick configurations for common use cases
+- **Custom Instructions**: Guide the AI with specific context
+- **Interactive or Automated**: Name speakers interactively or provide upfront
+
+---
 
 ## 🛠️ Tech Stack
 
-* **Runtime:** [Bun](https://bun.sh/) (Fast JavaScript runtime)
-* **Language:** TypeScript
-* **AI Model:** Google Gemini Multimodal API (`@google/generative-ai`)
-* **Media Processing:** [FFmpeg](https://ffmpeg.org/) (via `fluent-ffmpeg`)
-* **CLI Framework:** Commander.js
-* **Utilities:** `ora` (spinners), `chalk` (styling)
+| Component | Technology |
+|-----------|------------|
+| **Runtime** | [Bun](https://bun.sh/) |
+| **Language** | TypeScript |
+| **AI Model** | Google Gemini 2.5 Pro/Flash |
+| **Media Processing** | FFmpeg |
+| **CLI Framework** | Commander.js |
+
+---
 
 ## 📋 Prerequisites
 
-1.  **Bun:** You must have Bun installed.
-    ```bash
-    curl -fsSL [https://bun.sh/install](https://bun.sh/install) | bash
-    ```
-2.  **FFmpeg:** Must be installed and available in your system PATH (used for audio extraction and splitting).
-3.  **Google Gemini API Key:** Get a free key from [Google AI Studio](https://aistudio.google.com/).
+1. **Bun:** Install from [bun.sh](https://bun.sh/)
+   ```bash
+   curl -fsSL https://bun.sh/install | bash
+   ```
 
-## ⚙️ Installation & Setup
+2. **FFmpeg:** Must be in your system PATH
+   ```bash
+   # Windows (with Chocolatey)
+   choco install ffmpeg
+   
+   # macOS
+   brew install ffmpeg
+   
+   # Ubuntu/Debian
+   sudo apt install ffmpeg
+   ```
 
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/YourUsername/southbridge-transcriber.git](https://github.com/YourUsername/southbridge-transcriber.git)
-    cd southbridge-transcriber
-    ```
+3. **Google Gemini API Key:** Get free from [Google AI Studio](https://aistudio.google.com/)
 
-2.  **Install dependencies:**
-    ```bash
-    bun install
-    ```
+---
 
-3.  **Configure Environment:**
-    Create a `.env` file in the root directory:
-    ```env
-    GEMINI_API_KEY=your_actual_api_key_here
-    ```
+## ⚙️ Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/KartavyaChauhan/southbridge-transcriber.git
+cd southbridge-transcriber
+
+# Install dependencies
+bun install
+
+# Configure API key (create .env file)
+echo "GEMINI_API_KEY=your_api_key_here" > .env
+```
+
+---
 
 ## 🏃 Usage
 
-You can run the tool in multiple ways. The tool accepts video (`.mp4`, `.mov`, `.mkv`) or audio (`.mp3`, `.wav`) files.
+### Basic Usage
 
-### Ways to Run
 ```bash
-# Using bunx (Recommended - simulates installed package)
-bunx sb-transcribe test.mp4
-
-# Using bun run
-bun run index.ts test.mp4
-
-# Using bun directly
-bun index.ts test.mp4
-
-# Default (Generates SRT)
+# Default: Generate SRT subtitles
 bunx sb-transcribe video.mp4
 
-# Generate VTT (Web Captions)
+# Specify output format
+bunx sb-transcribe video.mp4 --format md
+bunx sb-transcribe video.mp4 --format json
+bunx sb-transcribe video.mp4 --format txt
 bunx sb-transcribe video.mp4 --format vtt
-
-# Generate Markdown (Meeting Summary)
-bunx sb-transcribe video.mp4 -f md
-
-# With inline API key (overrides .env)
-bunx sb-transcribe video.mp4 -k YOUR_API_KEY
-
-# Combine options
-bunx sb-transcribe video.mp4 -f vtt -k YOUR_API_KEY 
 ```
+
+### Complete CLI Reference
+
+```
+Usage: sb-transcribe [options] <file>
+
+Arguments:
+  file                                  Video or audio file to transcribe
+
+Options:
+  -V, --version                         Show version number
+  -k, --key <key>                       Google Gemini API Key (overrides .env)
+  -f, --format <format>                 Output: srt, vtt, md, txt, json (default: srt)
+  -m, --model <model>                   Model: pro, flash, flash-lite (default: pro)
+  -s, --speakers <names...>             Speaker names: -s "Alice" "Bob"
+  -i, --instructions <text>             Custom AI instructions
+  -ac, --audio-chunk-minutes <mins>     Chunk duration (default: 120)
+  -r, --report                          Generate meeting report
+  -p, --preset <preset>                 Preset: fast, quality, lite
+  --show-cost                           Show estimated API cost
+  --force                               Bypass cache, re-transcribe
+  --no-interactive                      Skip speaker identification prompts
+  -h, --help                            Show help
+```
+
+---
+
+## 📚 Examples
+
+### Generate Meeting Report with Action Items
+
+```bash
+bunx sb-transcribe meeting.mp4 --report --format md
+```
+
+**Output:** Creates both `meeting.md` (transcript) and `meeting_report.md` (AI summary with action items)
+
+### Fast Processing (Use Flash Model)
+
+```bash
+bunx sb-transcribe video.mp4 --preset fast
+```
+
+### Provide Speaker Names Upfront
+
+```bash
+bunx sb-transcribe podcast.mp3 -s "Alice" "Bob" "Charlie" --no-interactive
+```
+
+### Check Cost Before Processing
+
+```bash
+bunx sb-transcribe video.mp4 --show-cost
+```
+
+**Output:**
+```
+--- Cost Estimation ---
+  models/gemini-2.5-flash: 116,526 input + 19,218 output tokens
+  Total estimated cost: $0.0290
+```
+
+### Re-run with Different Format (Uses Cache - Instant!)
+
+```bash
+# First run: calls API, takes ~30 seconds
+bunx sb-transcribe video.mp4 --format md
+
+# Second run: uses cache, takes <1 second!
+bunx sb-transcribe video.mp4 --format json
+```
+
+### Force Re-transcription
+
+```bash
+bunx sb-transcribe video.mp4 --force
+```
+
+### Custom AI Instructions
+
+```bash
+bunx sb-transcribe video.mp4 -i "Focus on technical terminology and action items"
+```
+
+---
+
+## 🎛️ Presets
+
+| Preset | Model | Chunk Duration | Best For |
+|--------|-------|----------------|----------|
+| `fast` | Flash | 60 min | Quick transcriptions |
+| `quality` | Pro | 120 min | Important meetings |
+| `lite` | Flash-Lite | 30 min | Lowest cost |
+
+```bash
+bunx sb-transcribe video.mp4 --preset fast
+bunx sb-transcribe video.mp4 --preset quality
+bunx sb-transcribe video.mp4 --preset lite
+```
+
+---
 
 ## 📂 Project Structure
 
-```text
-SOUTHBRIDGE-TRANSCRIBER/
-├── .southbridge_intermediates/  # Stores raw debug data (JSON)
-│   └── test/                    # Subfolder per input file (Namespacing)
-│       ├── chunk_1_raw.json     # The raw response from Gemini
-│       └── chunk_2_raw.json
-├── node_modules/
-├── test_chunks/                 # Temporary split audio parts (created if file >20m)
-├── .env                         # API Key config
-├── ai.ts                        # "The Brain": Manages Gemini API, polling & retries
-├── audio.ts                     # "The Extractor": FFmpeg logic to strip video
-├── config.ts                    # "The Settings": Central config (Prompts, Models, Durations)
-├── formatting.ts                # "The Translator": Converts JSON -> SRT/VTT/MD
-├── index.ts                     # "The Manager": CLI entry point & orchestration
-├── splitter.ts                  # "The Scalability": Logic to split long audio files
-├── package.json                 # Dependencies & Bin configuration
-├── PROCESS_LOG.md               # Dev diary of architectural decisions
-└── README.md                    # This file
+```
+southbridge-transcriber/
+├── .southbridge_intermediates/   # Cached transcriptions (per file)
+│   └── video_name/
+│       └── chunk_1_raw.json      # Raw AI response (enables caching)
+├── ai.ts                         # Gemini API client, retry logic, report generation
+├── audio.ts                      # FFmpeg audio extraction
+├── config.ts                     # Prompts, models, costs, presets
+├── formatting.ts                 # Output generators (SRT, VTT, MD, TXT, JSON, Report)
+├── index.ts                      # CLI entry point & orchestration
+├── splitter.ts                   # Audio chunking for long files
+├── CHANGES.md                    # Detailed changelog since initial submission
+├── package.json                  # Dependencies & bin configuration
+└── README.md                     # This file
 ```
 
-## 🏗️ Architecture & Flow
+---
 
-1. **Input:** User provides a video file (e.g., `movie.mp4`).
-2. **Extraction:** `audio.ts` uses FFmpeg to create a lightweight `movie.mp3`.
-3. **Analysis (The "Splitter"):**
-   * `splitter.ts` checks duration.
-   * If **> 20 mins**: It splits audio into 20-minute chunks to prevent AI hallucination/drift.
-   * If **< 20 mins**: It processes the file as a single unit.
-4. **Transcription Loop:**
-   * `index.ts` iterates through every chunk.
-   * `ai.ts` uploads audio to Gemini and waits for processing.
-   * **Retry Logic:** If a model hits a rate limit (429), it auto-switches to a fallback model.
-   * **Intermediates:** Raw JSON responses are saved to `.southbridge_intermediates/{filename}/` for debugging.
-5. **Assembly:**
-   * Timestamps are offset (e.g., Chunk 2 starts at 20:00).
-   * `formatting.ts` calculates end-times and generates the final file (`.srt`, `.vtt`, or `.md`).
+## 🏗️ How It Works
+
+```
+┌─────────────────┐
+│   Input File    │  video.mp4 or audio.mp3
+└────────┬────────┘
+         ▼
+┌─────────────────┐
+│ Audio Extraction│  FFmpeg → .mp3
+└────────┬────────┘
+         ▼
+┌─────────────────┐
+│  Check Cache    │  .southbridge_intermediates/
+│  (if exists)    │  → Skip API call!
+└────────┬────────┘
+         ▼
+┌─────────────────┐
+│   Split Audio   │  If > 120 mins → chunks
+│  (if needed)    │  Otherwise → single chunk
+└────────┬────────┘
+         ▼
+┌─────────────────┐
+│  Gemini API     │  Upload audio → Transcribe
+│  (with retry)   │  Pro → Flash fallback on quota
+└────────┬────────┘
+         ▼
+┌─────────────────┐
+│ Speaker ID      │  Interactive or -s flag
+│  (optional)     │  
+└────────┬────────┘
+         ▼
+┌─────────────────┐
+│ Generate Output │  SRT/VTT/MD/TXT/JSON
+└────────┬────────┘
+         ▼
+┌─────────────────┐
+│ Generate Report │  (if --report)
+│  (optional)     │  Summary, Key Points, Actions
+└─────────────────┘
+```
+
+---
+
+## 💰 Cost Estimation
+
+Approximate costs per model (USD per million tokens):
+
+| Model | Input | Output |
+|-------|-------|--------|
+| gemini-2.5-pro | $1.25 | $10.00 |
+| gemini-2.5-flash | $0.15 | $0.60 |
+| gemini-2.0-flash-lite | $0.075 | $0.30 |
+
+**Example:** 1-hour video ≈ 120K tokens ≈ $0.03 with Flash model
+
+Use `--show-cost` to see actual usage after processing.
+
+---
 
 ## ⚠️ Known Limitations
 
-* **Speaker Accuracy:** AI may misidentify speakers during crosstalk (multiple people talking at once) or in noisy audio environments.
-* **Timestamp Precision:** While chunking mitigates drift, timestamps are approximate (±1-2 seconds) compared to waveform-aligned tools.
-* **File Size:** Very large files (>3 hours) are technically supported via chunking but may hit daily API cost limits depending on your Google Cloud plan.
+| Issue | Details |
+|-------|---------|
+| **Speaker Accuracy** | May misidentify during crosstalk or noisy audio |
+| **Model Differences** | Pro detects names better; Flash uses generic "Speaker 1" |
+| **Timestamp Precision** | Approximate (±1-2 seconds) |
+| **File Size** | Files >3 hours may hit daily API limits |
+| **Language** | Optimized for English |
+
+---
+
+## 🧪 Testing
+
+Run these commands to verify all features work:
+
+```bash
+# Test 1: Interactive speaker identification
+bunx sb-transcribe test.mp3
+
+# Test 2: Structured markdown output
+bunx sb-transcribe test.mp3 --format md --no-interactive
+
+# Test 3: Report generation
+bunx sb-transcribe test.mp3 --report --no-interactive
+
+# Test 4: Smart caching (should be instant)
+bunx sb-transcribe test.mp3 --format json --no-interactive
+
+# Test 5: Force re-transcription
+bunx sb-transcribe test.mp3 --force --no-interactive
+
+# Test 6: Preset + cost estimation
+bunx sb-transcribe test.mp3 --preset fast --show-cost --no-interactive
+
+# Test 7: Long video (1 hour)
+bunx sb-transcribe videoplayback.mp4 --no-interactive --report
+```
+
+---
+
+## 📄 Sample Outputs
+
+### Markdown Transcript (`--format md`)
+```markdown
+# Meeting Transcript
+
+_Processed on 1/13/2026, 8:05:44 PM_
+_Duration: 61 minutes_
+_Source: videoplayback.mp4_
+
+## Speakers
+- **Speaker 1**
+- **Speaker 2**
+
+## Transcript
+[0:00] **Speaker 1**: Welcome to the meeting...
+[0:15] **Speaker 2**: Thank you for having me...
+```
+
+### Meeting Report (`--report`)
+```markdown
+# Project Planning Meeting
+
+## Summary
+This meeting focused on Q1 deliverables...
+
+## Key Points
+- Budget approved for new initiative
+- Timeline set for March delivery
+
+## Action Items
+| Owner | Task | Deadline |
+|-------|------|----------|
+| Alice | Draft proposal | Jan 20 |
+| Bob | Review specs | Jan 25 |
+```
+
+---
+
+## 🤝 Comparison with Reference Projects
+
+| Feature | Offmute | Meeting-Diary | IPGU | **This Tool** |
+|---------|---------|---------------|------|---------------|
+| SRT format | ✅ | ✅ | ✅ | ✅ |
+| VTT format | ❌ | ❌ | ❌ | ✅ |
+| Markdown | ✅ | ✅ | ❌ | ✅ |
+| TXT format | ❌ | ✅ | ❌ | ✅ |
+| JSON format | ❌ | ✅ | ❌ | ✅ |
+| Interactive speaker ID | ❌ | ✅ | ❌ | ✅ |
+| Auto speaker naming | ✅ | ❌ | ❌ | ✅ |
+| Model selection | ✅ | ❌ | ✅ | ✅ |
+| Custom instructions | ✅ | ❌ | ❌ | ✅ |
+| Report generation | ✅ | ❌ | ❌ | ✅ |
+| Cost estimation | ❌ | ❌ | ✅ | ✅ |
+| Presets | ❌ | ❌ | ✅ | ✅ |
+| Smart caching | ❌ | ✅ | ❌ | ✅ |
+
+---
+
+## 📝 License
+
+MIT
+
+---
+
+## 👤 Author
+
+Built for the Southbridge AI Engineering take-home assignment.

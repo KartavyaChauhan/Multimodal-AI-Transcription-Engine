@@ -208,6 +208,40 @@ bunx sb-transcribe video.mp4 --preset lite      # Most economical
 
 ---
 
+### 10. Smart Caching (Meeting-Diary Parity)
+
+| Feature | Before | After |
+|---------|--------|-------|
+| **Cache transcription results** | ❌ | ✅ Saves raw JSON to `.southbridge_intermediates/` |
+| **Skip API on re-run** | ❌ | ✅ Detects cached results, skips expensive API calls |
+| **`--force` flag** | ❌ | ✅ Bypass cache and re-transcribe |
+
+**How it works:**
+1. First run: Calls Gemini API, saves result to `.southbridge_intermediates/<filename>/chunk_X_raw.json`
+2. Subsequent runs: Detects cache, loads from disk (instant, free)
+3. Use `--force` to re-transcribe if needed
+
+**Benefits:**
+- **Cost savings**: Re-running with different format (`--format json` after `--format md`) is FREE
+- **Speed**: Cached runs complete in seconds instead of minutes
+- **Speaker renaming**: Run again with `-s "Alice" "Bob"` without paying for another API call
+
+**Usage:**
+```bash
+# First run - calls API, saves to cache
+bunx sb-transcribe video.mp4 --format md
+
+# Second run - uses cache, FREE and instant!
+bunx sb-transcribe video.mp4 --format json
+
+# Force re-transcription (bypass cache)
+bunx sb-transcribe video.mp4 --force
+```
+
+**Commit:** `feat: add smart caching to skip API calls on re-runs (meeting-diary parity)`
+
+---
+
 ## Test Results: 1-Hour YouTube Video
 
 Successfully processed the video mentioned in feedback:
@@ -240,6 +274,7 @@ Options:
   -r, --report                          Generate a meeting report with key points and action items
   -p, --preset <preset>                 Use a preset: fast, quality, or lite
   --show-cost                           Show estimated API cost after processing
+  --force                               Force re-transcription, ignoring cached results
   --no-interactive                      Skip interactive speaker identification
   -h, --help                            display help for command
 ```
@@ -254,25 +289,7 @@ Options:
 4. `feat: add interactive speaker identification (meeting-diary parity)`
 5. `feat: add offmute features (--model, --instructions, --audio-chunk-minutes)`
 6. `feat: add report generation, cost estimation, and presets (ipgu parity)`
-
----
-
-## What's Different from Offmute/Meeting-Diary/IPGU
-
-| Feature | Offmute | Meeting-Diary | IPGU | Our Tool |
-|---------|---------|---------------|------|----------|
-| Transcription engine | Gemini | AssemblyAI | Gemini | **Gemini** |
-| Speaker diarization | ✅ | ✅ | ✅ | ✅ |
-| Auto speaker naming | ✅ | ❌ | ❌ | ✅ |
-| Interactive speaker ID | ❌ | ✅ | ❌ | ✅ |
-| Model selection | ✅ | ❌ | ✅ | ✅ |
-| Custom instructions | ✅ | ❌ | ❌ | ✅ |
-| Chunk duration control | ✅ | ❌ | ✅ | ✅ |
-| **Report generation** | ✅ | ❌ | ❌ | ✅ |
-| **Cost estimation** | ❌ | ❌ | ✅ | ✅ |
-| **Presets** | ❌ | ❌ | ✅ | ✅ |
-| Translation | ❌ | ❌ | ✅ | ❌ |
-| Multiple output formats | MD only | MD, SRT, TXT, JSON | SRT only | **All 5** |
+7. `feat: add smart caching to skip API calls on re-runs (meeting-diary parity)`
 
 ---
 
@@ -302,6 +319,11 @@ bunx sb-transcribe video.mp4 --format md --report
 
 # Show cost estimation (NEW)
 bunx sb-transcribe video.mp4 --show-cost
+
+# Smart caching (NEW) - second run is FREE and instant
+bunx sb-transcribe video.mp4 --format md      # First run: calls API
+bunx sb-transcribe video.mp4 --format json    # Second run: uses cache!
+bunx sb-transcribe video.mp4 --force          # Bypass cache
 
 # With custom instructions
 bunx sb-transcribe video.mp4 -i "Focus on action items"
