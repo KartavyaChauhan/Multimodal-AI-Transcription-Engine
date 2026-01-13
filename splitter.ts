@@ -23,20 +23,22 @@ async function getDuration(filePath: string): Promise<number> {
 /**
  * Splits the audio file into smaller chunks.
  * Returns an array of paths to the chunk files.
+ * @param audioPath - Path to the audio file
+ * @param chunkDuration - Duration of each chunk in seconds (default from config)
  */
-export async function splitAudio(audioPath: string): Promise<string[]> {
+export async function splitAudio(audioPath: string, chunkDuration: number = CHUNK_DURATION_SECONDS): Promise<string[]> {
   const spinner = ora('Checking audio duration...').start();
   
   try {
     const duration = await getDuration(audioPath);
     
-    // If file is short (< 20 mins), skip splitting logic
-    if (duration <= CHUNK_DURATION_SECONDS) {
+    // If file is short, skip splitting logic
+    if (duration <= chunkDuration) {
       spinner.succeed('Audio is short enough. No splitting needed.');
       return [audioPath];
     }
 
-    const totalChunks = Math.ceil(duration / CHUNK_DURATION_SECONDS);
+    const totalChunks = Math.ceil(duration / chunkDuration);
     spinner.text = `Long audio detected (${Math.floor(duration/60)}m). Splitting into ${totalChunks} chunks...`;
     
     const chunks: string[] = [];
@@ -49,7 +51,7 @@ export async function splitAudio(audioPath: string): Promise<string[]> {
     }
 
     for (let i = 0; i < totalChunks; i++) {
-      const startTime = i * CHUNK_DURATION_SECONDS;
+      const startTime = i * chunkDuration;
       const chunkFileName = `part_${i + 1}${parse.ext}`;
       const chunkPath = path.join(outputDir, chunkFileName);
       
@@ -63,7 +65,7 @@ export async function splitAudio(audioPath: string): Promise<string[]> {
       await new Promise<void>((resolve, reject) => {
         ffmpeg(audioPath)
           .setStartTime(startTime)
-          .setDuration(CHUNK_DURATION_SECONDS)
+          .setDuration(chunkDuration)
           .audioCodec('copy') // Fast copy, no re-encoding quality loss
           .save(chunkPath)
           .on('end', () => resolve())

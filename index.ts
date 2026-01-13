@@ -8,7 +8,7 @@ import { extractAudio } from './audio';
 import { GeminiClient } from './ai';
 import { splitAudio } from './splitter';
 import { saveOutput, type OutputFormat } from './formatting';
-import { CHUNK_DURATION_SECONDS, SUPPORTED_FORMATS } from './config'; 
+import { SUPPORTED_FORMATS } from './config'; 
 
 const program = new Command();
 
@@ -19,7 +19,10 @@ program
   .argument('<file>', 'Path to the video or audio file')
   .option('-k, --key <key>', 'Google Gemini API Key')
   .option('-f, --format <format>', 'Output format: srt, vtt, md, txt, or json', 'srt')
+  .option('-m, --model <model>', 'Model: pro, flash, or flash-lite', 'pro')
   .option('-s, --speakers <names...>', 'Known speaker names (e.g., -s "John" "Barbara")')
+  .option('-i, --instructions <text>', 'Custom instructions for the AI')
+  .option('-ac, --audio-chunk-minutes <minutes>', 'Audio chunk duration in minutes', '120')
   .option('--no-interactive', 'Skip interactive speaker identification')
   .action((filePath, options) => {
     run(filePath, options);
@@ -142,14 +145,26 @@ async function run(filePath: string, options: any) {
   }
 
   try {
+    // Parse chunk duration from CLI option
+    const chunkDurationMinutes = parseInt(options.audioChunkMinutes) || 120;
+    const chunkDurationSeconds = chunkDurationMinutes * 60;
+    
+    // Log model and instructions if provided
+    if (options.model && options.model !== 'pro') {
+      console.log(chalk.cyan(`Using model: ${options.model}`));
+    }
+    if (options.instructions) {
+      console.log(chalk.cyan(`Custom instructions: "${options.instructions.substring(0, 50)}..."`));
+    }
+
     // 3. Audio Extraction
     const mainAudioPath = await extractAudio(absolutePath);
 
     // 4. Split Audio (The IPGU Layer)
-    const chunks = await splitAudio(mainAudioPath);
+    const chunks = await splitAudio(mainAudioPath, chunkDurationSeconds);
     console.log(chalk.gray(`Processing ${chunks.length} chunks...`));
 
-    const client = new GeminiClient(apiKey);
+    const client = new GeminiClient(apiKey, options.model, options.instructions);
     let fullTranscript: any[] = [];
     
     // Get the base name of the input file for organizing outputs
@@ -158,7 +173,7 @@ async function run(filePath: string, options: any) {
     // 5. Loop through chunks
     for (let i = 0; i < chunks.length; i++) {
       const chunkPath = chunks[i]!;
-      const timeOffset = i * CHUNK_DURATION_SECONDS; // e.g., 0s, 1200s, 2400s...
+      const timeOffset = i * chunkDurationSeconds; // e.g., 0s, 1200s, 2400s...
       
       console.log(chalk.yellow(`\n--- Processing Chunk ${i + 1}/${chunks.length} ---`));
       

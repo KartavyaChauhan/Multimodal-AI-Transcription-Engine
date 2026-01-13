@@ -4,15 +4,27 @@ import ora from 'ora';
 import chalk from 'chalk';
 import { CANDIDATE_MODELS, TRANSCRIPTION_PROMPT } from './config';
 
-const SYSTEM_PROMPT = TRANSCRIPTION_PROMPT;
+/**
+ * Model name mapping for CLI convenience
+ */
+const MODEL_MAP: Record<string, string> = {
+  'pro': 'models/gemini-2.5-pro',
+  'flash': 'models/gemini-2.5-flash',
+  'flash-lite': 'models/gemini-2.0-flash-lite',
+};
 
 export class GeminiClient {
   private genAI: GoogleGenerativeAI;
   private fileManager: GoogleAIFileManager;
+  private preferredModel: string | null;
+  private customInstructions: string | null;
 
-  constructor(apiKey: string) {
+  constructor(apiKey: string, preferredModel?: string, customInstructions?: string) {
     this.genAI = new GoogleGenerativeAI(apiKey);
     this.fileManager = new GoogleAIFileManager(apiKey);
+    // Map short names to full model names
+    this.preferredModel = preferredModel ? (MODEL_MAP[preferredModel] || preferredModel) : null;
+    this.customInstructions = customInstructions || null;
   }
 
   /**
@@ -56,7 +68,18 @@ export class GeminiClient {
   async transcribe(fileUri: string): Promise<any> {
     const spinner = ora('Transcribing with Gemini...').start();
 
-    for (const modelName of CANDIDATE_MODELS) {
+    // Build the prompt with optional custom instructions
+    let prompt = TRANSCRIPTION_PROMPT;
+    if (this.customInstructions) {
+      prompt += `\n\nADDITIONAL INSTRUCTIONS:\n${this.customInstructions}`;
+    }
+
+    // Build model list: preferred model first, then fallbacks
+    const modelsToTry = this.preferredModel 
+      ? [this.preferredModel, ...CANDIDATE_MODELS.filter(m => m !== this.preferredModel)]
+      : CANDIDATE_MODELS;
+
+    for (const modelName of modelsToTry) {
       spinner.text = `Trying model: ${modelName}...`;
       
       try {
@@ -67,7 +90,7 @@ export class GeminiClient {
 
         const result = await model.generateContent([
           { fileData: { mimeType: "audio/mp3", fileUri } },
-          { text: SYSTEM_PROMPT }
+          { text: prompt }
         ]);
 
         const responseText = result.response.text();
