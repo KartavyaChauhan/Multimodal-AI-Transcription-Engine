@@ -17,12 +17,12 @@
   {
     "speaker": "Speaker 4",
     "start": "00:25",
-    "text": "Yes, it's important, but we're also busy with our regular jobs. It'll be difficult to fit things in."
+    "text": "Yes, it's important, but we're also busy with our regular jobs. It would be difficult to fit things in."
   },
   {
     "speaker": "Speaker 2",
-    "start": "00:32",
-    "text": "It's okay, Matteo, we'll work it out. I know that you all have a lot on at the moment combining this project with your regular jobs."
+    "start": "00:31",
+    "text": "It's okay, Matteo. We'll work it out. I know that you all have a lot on at the moment combining this project with your regular jobs."
   },
   {
     "speaker": "Speaker 5",
@@ -32,7 +32,7 @@
   {
     "speaker": "Speaker 2",
     "start": "00:41",
-    "text": "Good questions, Barbara. We have a number of key deliverables to discuss, so it's essential we're all in agreement about roles and responsibilities and also the timelines we're working to."
+    "text": "Good questions, Barbara. We have a number of key deliverables to discuss, so it's essential we're all in agreement about roles and responsibilities, and also the timelines we're working to."
   },
   {
     "speaker": "Speaker 3",
@@ -60,7 +60,7 @@
     "text": "Yeah, we've done something similar on previous projects."
   },
   {
-    "speaker": "Speaker 4",
+    "speaker": "Speaker 6",
     "start": "01:11",
     "text": "So, will you do that, John?"
   },
@@ -87,7 +87,7 @@
   {
     "speaker": "Speaker 2",
     "start": "01:51",
-    "text": "Hmm. I see. I can understand the challenge you're facing. I've been in that situation before. So, what can we do to help you hit those targets and free up some time?"
+    "text": "Mmm. I see. I can understand the challenge you're facing. I've been in that situation before. So, what can we do to help you hit those targets and free up some time?"
   },
   {
     "speaker": "Speaker 4",
@@ -107,7 +107,7 @@
   {
     "speaker": "Speaker 2",
     "start": "02:28",
-    "text": "Could you, Barbara? Hmm. I'm not sure if it's fair to ask Barbara to be supporting Matteo in his regular job so he can work on this project."
+    "text": "Could you, Barbara? Hmm. I'm not sure if it's fair to ask Barbara to be supporting Matteo in his regular job, so he can work on this project."
   },
   {
     "speaker": "Speaker 5",
@@ -117,7 +117,7 @@
   {
     "speaker": "Speaker 2",
     "start": "02:46",
-    "text": "Yeah, you're right. Okay. Thanks a lot, Barbara. I appreciate it. Matteo, would that work for you?"
+    "text": "Yeah. You're right. Okay. Thanks a lot, Barbara. I appreciate it. Matteo, would that work for you?"
   },
   {
     "speaker": "Speaker 4",
@@ -137,6 +137,6 @@
   {
     "speaker": "Speaker 1",
     "start": "03:12",
-    "text": "This recording is from the British Council. To find more activities to practice your English, visit www.britishcouncil.org/learnenglish"
+    "text": "This recording is from the British Council. To find more activities to practice your English, visit www.britishcouncil.org/learnenglish."
   }
 ]
