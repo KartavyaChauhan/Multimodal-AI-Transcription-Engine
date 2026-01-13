@@ -121,7 +121,7 @@ export function generateVtt(transcript: TranscriptItem[]): string {
 }
 
 /**
- * Generates Markdown content from the transcript JSON.
+ * Generates Markdown content from the transcript JSON (meeting-diary style).
  */
 export function generateMarkdown(transcript: TranscriptItem[], originalFilePath: string): string {
   const fileName = path.basename(originalFilePath);
@@ -130,8 +130,16 @@ export function generateMarkdown(transcript: TranscriptItem[], originalFilePath:
   // Extract unique speakers
   const speakers = [...new Set(transcript.map(item => item.speaker))];
   
-  let mdContent = `# Transcript: ${fileName}\n\n`;
-  mdContent += `_Processed on ${processedDate}_\n\n`;
+  // Calculate duration from last item
+  const lastItem = transcript.at(-1);
+  const durationSeconds = lastItem ? timeToSeconds(lastItem.start) + LAST_SUBTITLE_DURATION : 0;
+  const durationMinutes = Math.ceil(durationSeconds / 60);
+  
+  // Build markdown (meeting-diary style)
+  let mdContent = `# Meeting Transcript\n\n`;
+  mdContent += `_Processed on ${processedDate}_\n`;
+  mdContent += `_Duration: ${durationMinutes} minutes_\n`;
+  mdContent += `_Source: ${fileName}_\n\n`;
   mdContent += `## Speakers\n\n`;
   speakers.forEach(speaker => {
     mdContent += `- **${speaker}**\n`;
@@ -140,7 +148,7 @@ export function generateMarkdown(transcript: TranscriptItem[], originalFilePath:
 
   transcript.forEach(item => {
     const readableTime = secondsToReadableTime(timeToSeconds(item.start));
-    mdContent += `**[${readableTime}] ${item.speaker}:** ${item.text}\n\n`;
+    mdContent += `[${readableTime}] **${item.speaker}**: ${item.text}\n\n`;
   });
 
   return mdContent;
