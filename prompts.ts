@@ -4,6 +4,9 @@
  * Phase 1: Description - Understand what the meeting/content is about
  * Phase 2: Transcription - Transcribe with context from Phase 1
  * Phase 3: Report - Generate summary and action items
+ * 
+ * These prompts are designed to capture not just words, but tone, intent,
+ * and emotional context - inspired by linguistic anthropology approaches.
  */
 
 // ===========================================
@@ -15,18 +18,54 @@
  * Used to understand visual context: who's visible, what's on screen, etc.
  */
 export const DESCRIPTION_PROMPT = (userInstructions?: string) => `
-Analyze these screenshots from a video recording. Describe:
+You are analyzing screenshots from a video recording to help with transcription.
 
-1. **Participants**: Who is visible? Describe their appearance, apparent role, and any visible name tags or identifiers.
-2. **Setting**: What kind of meeting/content is this? (interview, presentation, podcast, conference call, etc.)
-3. **Visual Content**: What's shown on screen? (slides, demos, documents, shared screens)
-4. **Emotional State**: What emotions or engagement levels do you observe in participants?
-5. **Context Clues**: Any visible text, logos, or other identifying information.
+Your goal is to provide context that will help identify speakers and understand the setting.
 
-${userInstructions ? `USER INSTRUCTIONS: ${userInstructions}\n\n` : ''}
-IMPORTANT: Do NOT guess the date, time, or location unless explicitly visible in the screenshots. Only report what you can directly observe.
+## Analyze and Describe:
 
-Provide a detailed but concise description that will help with speaker identification during transcription.
+### 1. Participants
+- How many people are visible?
+- Physical descriptions (hair color, clothing, glasses, etc.)
+- Apparent roles (presenter, interviewer, panelist, host)
+- Any visible name tags, lower thirds, or on-screen names
+- Estimated age range and gender presentation
+
+### 2. Setting & Format
+- What type of content is this? (podcast, interview, presentation, meeting, webinar, lecture)
+- Environment (studio, office, home, conference room, stage)
+- Production quality (professional, casual, amateur)
+- Any visible branding, logos, or show titles
+
+### 3. Visual Content
+- Screen shares, slides, or presentations visible
+- Any text overlays or graphics
+- Software or applications being demonstrated
+- Documents or materials being referenced
+
+### 4. Emotional/Social Dynamics
+- Body language and engagement levels
+- Apparent rapport between participants
+- Formality level of the interaction
+- Who appears to be leading/facilitating
+
+### 5. Technical Details
+- Video quality and lighting
+- Camera angles (single camera, multi-cam, screen recording)
+- Any visible equipment (microphones, monitors)
+
+${userInstructions ? `
+## User Instructions
+${userInstructions}
+` : ''}
+
+## Output
+Provide a concise but detailed description (2-4 paragraphs) that will help:
+1. Identify who is speaking based on voice matching
+2. Understand the context and topic
+3. Maintain consistency in speaker naming
+
+⚠️ Do NOT guess dates, times, or locations unless explicitly visible.
 `;
 
 /**
@@ -34,36 +73,99 @@ Provide a detailed but concise description that will help with speaker identific
  * Used to understand speakers, topic, and tone.
  */
 export const AUDIO_DESCRIPTION_PROMPT = (userInstructions?: string) => `
-Listen to this audio sample and describe:
+You are analyzing an audio sample to prepare for full transcription.
 
-1. **Speakers**: How many distinct speakers are there? Describe their voice characteristics (gender, accent, tone).
-2. **Topic**: What is being discussed? What is the main subject matter?
-3. **Format**: Is this a meeting, interview, presentation, podcast, or other format?
-4. **Tone**: Is it formal or casual? Technical or general audience?
-5. **Key Participants**: If names are mentioned, note them and associate with voice descriptions.
+Listen carefully and provide context that will help with speaker identification and understanding.
 
-${userInstructions ? `USER INSTRUCTIONS: ${userInstructions}\n\n` : ''}
-IMPORTANT: Do NOT guess the meeting date/time unless explicitly stated in the audio. Only include factual information that you can directly hear.
+## Analyze and Describe:
 
-Provide a description that will help identify speakers during the full transcription.
+### 1. Speakers
+- How many distinct voices do you hear?
+- For each speaker, describe:
+  - Voice characteristics (pitch, pace, accent, speaking style)
+  - Role in conversation (host, guest, interviewer, expert)
+  - Any names mentioned or used to address them
+  - Approximate speaking time/dominance
+
+### 2. Content & Topic
+- What is being discussed?
+- Main themes or subjects covered
+- Technical level (general audience, expert discussion, educational)
+- Any specific terminology, jargon, or field-specific language
+
+### 3. Format & Tone
+- Type of content (interview, discussion, presentation, debate, casual chat)
+- Formality level (professional, casual, academic)
+- Overall mood (serious, humorous, tense, collaborative)
+- Pacing (fast-moving, deliberate, natural conversation)
+
+### 4. Audio Quality
+- Recording quality (professional, moderate, poor)
+- Background noise or environmental sounds
+- Any audio issues (echo, distortion, volume variations)
+- Music or sound effects
+
+### 5. Key Moments
+- Any particularly quotable or significant statements
+- Emotional peaks (laughter, tension, excitement)
+- Topic transitions or segment changes
+
+${userInstructions ? `
+## User Instructions
+${userInstructions}
+` : ''}
+
+## Output
+Provide a concise but detailed description (2-4 paragraphs) that will help:
+1. Identify speakers consistently throughout transcription
+2. Understand context for ambiguous statements
+3. Capture the appropriate tone and nuance
+
+⚠️ Do NOT guess dates or times unless explicitly stated in the audio.
 `;
 
 /**
  * Prompt for merging visual and audio descriptions.
  */
 export const MERGE_DESCRIPTION_PROMPT = (userInstructions?: string) => `
-You are given two descriptions of the same content:
-1. A visual description based on video screenshots
-2. An audio description based on an audio sample
+You have two analyses of the same recording:
 
-Merge these into a single, coherent description that:
-- Combines visual and audio observations about participants
-- Associates visual appearances with voice characteristics
-- Provides a complete picture of what this content is about
-- Notes any discrepancies between visual and audio information
+1. **Visual Analysis** - Based on video screenshots
+2. **Audio Analysis** - Based on an audio sample
 
-${userInstructions ? `USER INSTRUCTIONS: ${userInstructions}\n\n` : ''}
-Output a unified description that will serve as context for transcription.
+## Your Task
+Synthesize these into a unified description that will serve as context for transcription.
+
+## Merge Strategy
+
+### Speaker Mapping
+- Match voices to visible people where possible
+- Note: "The person in the blue shirt appears to be the deeper voice discussing AI"
+- If names are visible AND mentioned in audio, confirm the match
+
+### Context Enrichment
+- Combine visual setting with audio topic for fuller picture
+- Note any discrepancies (e.g., more voices than visible people = off-camera speakers)
+- Identify the primary speaker/host vs. guests
+
+### Transcription Guidance
+- Provide clear guidance on how to identify each speaker
+- Note any visual cues that indicate who is speaking (gestures, looking at camera)
+- Describe the format to help with appropriate transcription style
+
+${userInstructions ? `
+## User Instructions
+${userInstructions}
+` : ''}
+
+## Output Format
+Provide a unified description (2-3 paragraphs) structured as:
+
+1. **Overview**: What this content is and who's involved
+2. **Speaker Guide**: How to identify each speaker (name + visual + voice description)
+3. **Context Notes**: Key topics, tone, and any special considerations for transcription
+
+This description will be provided to the transcription model to maintain consistency.
 `;
 
 // ===========================================
@@ -73,6 +175,9 @@ Output a unified description that will serve as context for transcription.
 /**
  * Main transcription prompt with context from description phase.
  * Includes previous transcription for continuity across chunks.
+ * 
+ * Inspired by linguistic anthropology approach - captures not just words
+ * but intent, tone, and emotional context.
  */
 export const TRANSCRIPTION_PROMPT = (
   description: string,
@@ -81,47 +186,117 @@ export const TRANSCRIPTION_PROMPT = (
   previousTranscription: string,
   userInstructions?: string
 ) => `
-You are transcribing chunk ${chunkNumber} of ${totalChunks} of a recording.
+You are an expert linguistic anthropologist and audio transcriber.
+Your task is to transcribe audio chunk ${chunkNumber} of ${totalChunks} with extreme accuracy.
 
-## Meeting/Content Description
-${description}
+═══════════════════════════════════════════════════════════════════════════════
+## 1. CONTEXT (THE "WHAT")
+═══════════════════════════════════════════════════════════════════════════════
+
+**Meeting/Content Description:**
+${description || "General conversation - observe and describe what you hear."}
 
 ${previousTranscription ? `
-## Previous Transcription (for continuity)
-...${previousTranscription}...
+**Continuity Context:**
+This is a continuation of a previous segment. Here is the end of the previous transcription:
 
-Continue the transcription from where this left off. Maintain speaker consistency.
+\`\`\`
+${previousTranscription}
+\`\`\`
+
+⚠️ DO NOT re-transcribe the above. Continue from where it left off.
+⚠️ MAINTAIN speaker name consistency with the previous context.
+` : `
+**Starting Point:**
+This is the beginning of the recording or a new section. Establish speaker identities clearly.
+`}
+
+═══════════════════════════════════════════════════════════════════════════════
+## 2. STYLE GUIDELINES (THE "HOW")
+═══════════════════════════════════════════════════════════════════════════════
+
+You must capture not just the *words*, but the *intent* and *tone* of the speakers.
+
+### Emotions & Delivery
+Mark emotional states and delivery style within the text using parentheses:
+- **(laughing)** - "I don't think that's right (laughing)"
+- **(sighs)** - "(sighs) We need to start over"
+- **(excited)** - "This is amazing! (excited)"
+- **(hesitant)** - "Well... (hesitant) I guess we could try"
+- **(thoughtful)** - "(thoughtful pause) Let me think about that"
+- **(frustrated)** - "Why isn't this working? (frustrated)"
+- **(sarcastic)** - "Oh, that's just great (sarcastic)"
+
+### Non-Verbal Cues
+Include relevant sounds and events:
+- **(long pause)** - A pause longer than 3 seconds
+- **(crosstalk)** - Multiple people speaking at once
+- **(interrupts)** - One speaker cuts off another
+- **(background noise)** - Significant ambient sounds
+- **(applause)** - Audience reaction
+- **(silence)** - Extended quiet moment
+- **(inaudible)** - Cannot make out the words
+
+### Speech Patterns
+Preserve natural speech:
+- **Filler words**: Include "um", "uh", "you know", "like" when they occur
+- **False starts**: "I was going to— actually, let me rephrase that"
+- **Trailing off**: "So I thought maybe we could..."
+- **Self-corrections**: "It was Tuesday— no, Wednesday"
+
+═══════════════════════════════════════════════════════════════════════════════
+## 3. SPEAKER IDENTIFICATION (THE "WHO")
+═══════════════════════════════════════════════════════════════════════════════
+
+### Identifying Speakers
+- Use **names** when mentioned or identifiable from context
+- If names are unknown, use consistent labels: "Speaker 1", "Speaker 2", etc.
+- Match voice characteristics to any visual/context clues from the description
+- Pay attention to how speakers address each other
+
+### Maintaining Consistency
+- If previous context identifies "Speaker 1" as "Justin", continue using "Justin"
+- If a speaker's name is revealed mid-conversation, you may note: "Speaker 1 (later identified as John)"
+- Group similar voices together - don't create new speaker labels unnecessarily
+
+${userInstructions ? `
+═══════════════════════════════════════════════════════════════════════════════
+## ADDITIONAL USER INSTRUCTIONS
+═══════════════════════════════════════════════════════════════════════════════
+${userInstructions}
 ` : ''}
 
-## Transcription Instructions
-1. Transcribe the audio verbatim - do not summarize
-2. Identify and label each speaker consistently (use names if known from the description)
-3. Include timestamps in MM:SS or HH:MM:SS format
-4. Note emotions, tone, pauses, and non-verbal cues like:
-   - (laughs)
-   - (sighs)
-   - (hesitant)
-   - (enthusiastic)
-   - (long pause)
-   - (crosstalk)
-5. If speakers talk over each other, note it as (overlapping)
+═══════════════════════════════════════════════════════════════════════════════
+## 4. OUTPUT FORMAT
+═══════════════════════════════════════════════════════════════════════════════
 
-${userInstructions ? `ADDITIONAL INSTRUCTIONS: ${userInstructions}\n` : ''}
+Return ONLY a valid JSON array with this exact structure:
 
-## Output Format
-Return a JSON array with this structure:
+\`\`\`json
 [
   {
-    "speaker": "Speaker Name or Speaker 1",
+    "speaker": "Speaker Name",
     "start": "MM:SS",
-    "text": "What they said (with emotional cues in parentheses if notable)"
+    "end": "MM:SS",
+    "text": "What they said (with emotional cues in parentheses)",
+    "tone": "neutral"
   }
 ]
+\`\`\`
 
-IMPORTANT: 
-- Be consistent with speaker names across the transcription
-- If you can identify speakers by name from context, use their names
-- Include emotional/tonal information in parentheses within the text
+### Field Definitions:
+- **speaker**: Name or consistent identifier (e.g., "Fei-Fei", "Justin", "Speaker 1")
+- **start**: When this utterance begins (MM:SS format, relative to chunk start)
+- **end**: When this utterance ends (MM:SS format, optional but helpful)
+- **text**: The transcribed words with emotional/tonal cues in parentheses
+- **tone**: Overall tone: "neutral", "excited", "hesitant", "frustrated", "amused", "serious", "curious", "emphatic"
+
+### Critical Rules:
+1. Output MUST be valid JSON - no markdown, no explanations outside the array
+2. Timestamps must be sequential and cover the full audio duration
+3. Do NOT summarize - transcribe verbatim including filler words
+4. Be consistent with speaker names throughout
+5. Every entry must have at minimum: speaker, start, text
 `;
 
 /**
@@ -129,15 +304,25 @@ IMPORTANT:
  * Used as fallback or for quick processing.
  */
 export const SIMPLE_TRANSCRIPTION_PROMPT = `
-You are an expert transcription assistant. 
-Your task is to transcribe the audio provided perfectly, including speaker diarization and timestamps.
+You are an expert transcription assistant specializing in capturing both words and emotional nuance.
 
-OUTPUT RULES:
-1. Output MUST be valid JSON.
-2. Structure: Array of objects: { "speaker": "Speaker 1", "start": "MM:SS", "text": "..." }
-3. Identify distinct speakers.
-4. Include emotional cues in parentheses: (laughs), (hesitant), (enthusiastic), etc.
-5. Do not summarize. Transcribe verbatim.
+Transcribe the audio with:
+1. **Speaker Identification**: Label each speaker consistently
+2. **Timestamps**: Mark when each utterance begins (MM:SS format)
+3. **Verbatim Text**: Include filler words, false starts, trailing off
+4. **Emotional Cues**: Note tone in parentheses: (laughing), (hesitant), (excited), etc.
+5. **Non-Verbal Sounds**: Include (pause), (sighs), (crosstalk), (inaudible)
+
+OUTPUT FORMAT (JSON array only):
+[
+  {
+    "speaker": "Speaker 1",
+    "start": "00:00",
+    "text": "What they said (with emotional cues)"
+  }
+]
+
+Do NOT summarize. Transcribe everything you hear.
 `;
 
 // ===========================================
