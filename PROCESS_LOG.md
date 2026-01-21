@@ -701,6 +701,44 @@ Documented Actual Problems
 ⚠ Previous chunks used named speakers (Fei-Fei, Justin), but this chunk uses generic names (Speaker 1)
 → Normalizing speakers: Speaker 1→Fei-Fei
 
+# Raw Prompts Used
+
+1.	i run the offmute repo so that i could get what is the expected result and i found many differences like the result provides few screenshots and video divided in chunks of 10 minutes which makes 6 of them as the video is around 60 minutes long and the transcription file updates live as the analysis is being carried on in like 7 parts so for each part it shows how the analysis is being shown in the md file like 6/7 (87%) done and when full analysis done this disappears i am attaching the screenshot of the resulting directory and how it contains all the necessary output files and also providing u the command prompt log while analyzing note that it might contain quota hit numerous time but that is not our issue as we are handling that in our current code just observe how it works and how we can implement that in our code, below is the
+(contains the cli output of the offmute repo I ran )..
+Transcription file created from running the offmute repo on the video provided.
+
+2.	 just to tell you we are first working on this issue ### The Tool Throws Away Video .. (contains the defined loop hole in claude analysis) so forget everything else and the above information i provided you was specific to this issue especially and now first lets solve this problem and i have a doubt the 6 chunks 10 minutes each makes the full video but there is a 7th chunk in video folder videoplayback_tag_sample.mp3 and its 20 minutes long what is this?
+3.	fix this issue first Cannot find module './prompts' or its corresponding type declarations. then test the currtn implementaion on the videoplayback.mp4 and in the rpevious output the file_transcription.md was not createdi guess so like this one created when i ran offmute… (Transcription file created from running the offmute repo) and nor u created the video file with the video chunks see the atatched screenshot for better understanding of the expected output
+
+4.	you still didn't rectify this issue first of rectify it Cannot find module './prompts' or its corresponding type declarations. and i opened final_description.json and got this {
+"finalDescription": "No description available.",
+"imageDescription": "",
+"audioDescription": ""
+} is this an issue and you didn't include transcription_progress.json which includes this (contnents of the given file).. although full transcription section was very fine
+
+5.	import { DESCRIPTION_PROMPT, AUDIO_DESCRIPTION_PROMPT, MERGE_DESCRIPTION_PROMPT } from './prompts';
+Cannot find module './prompts' or its corresponding type declarations. see the issue is present in describe.ts and it still is not rectified and we should once agian try run for the final check for videoplayback.mp4 so that can move on to next issue
+
+6.	ok i guess now evrything is fixed and no result was obtained due to quota limit hit i guess so can we commit this change in hte repo now ?
+
+7.	noow lets rectify this issue ### Chunks Are Islands (contains the issue description) and ipgu repo description as it was relates to this issue.
+
+8.	can we verify these changes or it just fine to be present in the code ?
+
+9.	YES, commit these changes AND FOR NEXT ISSUE ### No Quality Checking I guess we have already impelmented it ?
+
+10.	OK NOW MOVING ON to the next issue ### The Prompts Are Basic … (issue description) (provided a better prompt from gemini and aksed whether  it)… would help and will yeild better results please see that and if there is a better prompt u can implement fell free to do that
+
+11.	for the intent and tone propt we implemented where will its result be visible when we run the .mp4 file i think we should run the videoplayback.mp4 file to verfiy these changes as i have chnaged the api key maybe the quota issue might not arise
+
+12.	see these logs i obtained ..( contains the output logs)
+
+13.	OK next issue ### No AssemblyAI Option.. (provided solution form gemini )do u also think that there is no need to change the code just need to justfy our approach ?
+
+14.	ok next i dont find any coding issue if yes please tell and how to approach them ..(provided it remaining issues form the claude analysis doc)
+
+15.	ran and got these erros PS C:\Users\karta\southbridge-transcriber> bunx tsc --noEmit 2>&1 index.ts:277:30 - error TS2538: Type '{}' cannot be used as an index type.Found 3 errors in the same file, starting at: index.ts:277.. (error logs)
+
 
 
 
