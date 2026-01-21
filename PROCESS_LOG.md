@@ -280,11 +280,11 @@ While testing the updated pipeline, I observed two related issues:
 
 1.	Description outputs were empty
 The generated final_description.json contained:
-2.	{
-3.	  "finalDescription": "No description available.",
-4.	  "imageDescription": "",
-5.	  "audioDescription": ""
-6.	}
+	{
+	  "finalDescription": "No description available.",
+	  "imageDescription": "",
+	  "audioDescription": ""
+	}
    
 As a result, the Markdown output showed empty or unhelpful sections:
 
@@ -294,7 +294,7 @@ o	Visual Analysis
 
 However, the Full Transcription section was correctly populated.
 
-8.	Missing transcription progress tracking
+2.	Missing transcription progress tracking
 
 Unlike offmute, the pipeline did not persist a transcription_progress.json file capturing:
 
@@ -388,16 +388,27 @@ End-to-End Verification
 Running the tool on videoplayback.mp4 produced the following structure, matching offmute’s workflow:
 
 .southbridge_videoplayback/
+
 ├── audio/
+
 │   ├── videoplayback_chunk_0.mp3
+
 │   ├── videoplayback_chunk_1.mp3
+
 │   ├── ...
+
 │   └── videoplayback_tag_sample.mp3
+
 ├── screenshots/
+
 │   ├── videoplayback_screenshot_0.jpg
+
 │   ├── videoplayback_screenshot_1.jpg
+
 │   ├── videoplayback_screenshot_2.jpg
+
 │   └── videoplayback_screenshot_3.jpg
+
 └── transcription/
     ├── chunk_0_raw.json
     ├── transcription_progress.json
