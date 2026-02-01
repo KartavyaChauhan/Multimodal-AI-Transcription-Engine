@@ -212,8 +212,8 @@ bunx sb-transcribe video.mp4 --preset lite
 ## 📂 Project Structure
 
 ```
-southbridge-transcriber/
-├── .southbridge_intermediates/   # Cached transcriptions (per file)
+Multimodal-AI-Transcription-Engine/
+├── .Multimodal-AI-Transcription-Engine_intermediates/   # Cached transcriptions (per file)
 │   └── video_name/
 │       └── chunk_1_raw.json      # Raw AI response (enables caching)
 ├── ai.ts                         # Gemini API client, retry logic, report generation
