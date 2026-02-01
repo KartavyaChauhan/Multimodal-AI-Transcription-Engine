@@ -1,27 +1,6 @@
-# Southbridge Transcriber 🐸
+# Multimodal-AI-Transcription-Engine
 
 A robust, multimodal AI transcription and diarization tool built for the Southbridge take-home assignment. It combines the architectural strengths of reference tools (`ipgu`, `offmute`, `meeting-diary`) into a single, production-ready CLI.
-
----
-
-## ✨ What's New (Since Initial Submission)
-
-| Feature | Description |
-|---------|-------------|
-| **Multimodal Analysis** | Uses **Video Screenshots + Audio** for accurate speaker ID & context |
-| **Sequential Processing** | 10-min chunks with **context chaining** (no more lost context) |
-| **IPGU-Style Validation** | Auto-retries on bad timestamps, gaps, or hallucinations |
-| **Speaker Normalization** | Automatically fixes "Speaker 1" → "John" across chunks |
-| **5 Output Formats** | SRT, VTT, Markdown, TXT, JSON |
-| **Interactive Speaker ID** | Tool pauses to let you name each speaker |
-| **Smart Caching** | Re-runs are instant (skips API calls) |
-| **Meeting Reports** | AI-generated summaries with action items |
-| **Model Selection** | Choose Pro, Flash, or Flash-Lite |
-| **Presets** | Quick configs: `fast`, `quality`, `lite` |
-| **Cost Estimation** | See token usage and estimated cost |
-| **120-min Chunks** | Better speaker consistency for long files |
-
-See [CHANGES.md](./CHANGES.md) for full details.
 
 ---
 
@@ -102,8 +81,8 @@ To ensure production-grade reliability (matching `ipgu` standards), the tool inc
 
 ```bash
 # Clone the repository
-git clone https://github.com/KartavyaChauhan/southbridge-transcriber.git
-cd southbridge-transcriber
+git clone https://github.com/KartavyaChauhan/Multimodal-AI-Transcription-Engine.git
+cd Multimodal-AI-Transcription-Engine
 
 # Install dependencies
 bun install
